@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import './App.css';
+import { useLocalState } from './util/useLocalStorage';
 
 function App() {
-
   
-  const [jwt,setJwt] = useState("");
-  
-  
+  const [jwt,setJwt] = useLocalState("", "jwt");
   
   useEffect(()=>{
-    
-
+    if(!jwt)
+{
     const reqBody={
       "username" :"joakim",
       "password" :1234
@@ -31,7 +29,8 @@ function App() {
           setJwt(headers.get("authorization"));
           
         });
-      },[]);
+        }
+      });
       
       useEffect(() =>{
         console.log(`the JWT is: ${jwt}`);
