@@ -33,7 +33,7 @@ function App() {
       });
       
       useEffect(() =>{
-        console.log(`the JWT is: ${jwt}`);
+        // console.log(`the JWT is: ${jwt}`);
         // console.log(`we have the JWT: ${jwt}`);
 
       },[jwt]);
