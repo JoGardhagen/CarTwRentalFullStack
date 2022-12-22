@@ -1,5 +1,8 @@
 import { useEffect} from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
+import Dashboard from "./Dashboard";
+import Homepage from './Homepage';
 import { useLocalState } from './util/useLocalStorage';
 
 function App() {
@@ -40,10 +43,13 @@ function App() {
 
 
   return ( 
-    <div className="App">
-      <h1>Hello World!</h1>
-      <div>JWT value is {jwt}</div>
-    </div>
+    <Routes>
+      <Route path="/dashboard" element={ <Dashboard/> }/>
+      <Route path="/" element={ <Homepage/> }/>
+
+      
+    </Routes>
+    
   ); 
 }
 
