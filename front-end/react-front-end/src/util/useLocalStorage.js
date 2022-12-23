@@ -7,11 +7,11 @@ function useLocalState(defaultValue,key){
         ? JSON.parse(localStorageValue) 
         :defaultValue;
     });
-    console.log(`localStorageValue ${key} is :${value}`);
+    // console.log(`localStorageValue ${key} is :${value}`);
     
     useEffect(()=>{
         localStorage.setItem(key,JSON.stringify(value))
-        console.log(`updated local Storage ${key} to${value}`);
+        // console.log(`updated local Storage ${key} to${value}`);
     },[key,value]);
 
     return [value,setValue];
