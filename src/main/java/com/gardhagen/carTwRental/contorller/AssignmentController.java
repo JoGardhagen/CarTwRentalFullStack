@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -27,5 +28,12 @@ public class AssignmentController {
 //        Set<Assignment> assignmentByUser = assignmentService.findByUser(user);
 //        return ResponseEntity.ok(assignmentByUser);
           return ResponseEntity.ok(assignmentService.findByUserEntity(user));
+    }
+    @GetMapping("{assignmentId}")
+    public ResponseEntity<?> getAssignments(@PathVariable Long assignmentId ,@AuthenticationPrincipal UserEntity user){
+//        Set<Assignment> assignmentByUser = assignmentService.findByUserEntity(user);
+        Optional<Assignment> assignmentOpt = assignmentService.findById(assignmentId);
+        return ResponseEntity.ok(assignmentOpt.orElse(new Assignment()));
+//        return ResponseEntity.ok(assignmentService.findByUserEntity(user));
     }
 }
