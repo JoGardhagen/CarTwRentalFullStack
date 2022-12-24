@@ -23,7 +23,7 @@ const Dashboard = () => {
     },[]);
 
     function createAssignment(){
-        fetch("/api/assignments",{
+        fetch("/api/assignments/",{
             headers:{
                 "content-type" : "application/json",
                 Authorization : `Bearer ${jwt}`,
