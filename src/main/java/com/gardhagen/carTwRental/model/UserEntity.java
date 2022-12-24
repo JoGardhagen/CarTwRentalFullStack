@@ -2,12 +2,14 @@ package com.gardhagen.carTwRental.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,8 +26,11 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userEntity")
-//    @JsonIgnore
+////    @JsonIgnore
     private List<Authority> authorities = new ArrayList<>();
+
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
     public long getId() {
         return id;
@@ -69,6 +74,11 @@ public class UserEntity implements UserDetails {
        roles.add(new Authority("ROLE_USER"));
        return authorities;
     }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+//    return Collections.singletonList(authority);
+//}
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -89,4 +99,11 @@ public class UserEntity implements UserDetails {
         return true;
     }
 
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 }

@@ -2,6 +2,7 @@ package com.gardhagen.carTwRental.contorller;
 
 import com.gardhagen.carTwRental.dto.AuthCredentialsRequest;
 import com.gardhagen.carTwRental.dto.RegisterDto;
+import com.gardhagen.carTwRental.dto.UserDto;
 import com.gardhagen.carTwRental.model.UserEntity;
 import com.gardhagen.carTwRental.repository.UserRepository;
 import com.gardhagen.carTwRental.service.UserServiceDetailsImpl;
@@ -64,28 +65,49 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }}
         @PostMapping("register")
-        public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+        public ResponseEntity<?> register(@RequestBody UserDto userDto){
+            userServiceDetailsImpl.createUser(userDto);
             try {
+                Authentication authenticate = authenticationManager
+                        .authenticate(
+                                new UsernamePasswordAuthenticationToken(
+                                        userDto.getUsername(), userDto.getPassword()
+                                )
+                        );
 
+                UserEntity user = (UserEntity) authenticate.getPrincipal();
 
-//            if(userServiceDetailsImpl.loadUserByUsername(registerDto.getUsername())){
-//                return new ResponseEntity<>("username is taken!", HttpStatus.BAD_REQUEST);
-//            }
-                passwordEncoder = new BCryptPasswordEncoder();
-            UserEntity user = new UserEntity();
-            user.setUsername(registerDto.getUsername());
-            user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
-
-//            Role roles = roleRepository.findByName("USER").get();
-//            user.setRoles(Collections.singletonList(roles));
-//                user.setAuthorities();
-
-//            userRepository.save(user);
-                userServiceDetailsImpl.registerNewUser(user);
-            return new ResponseEntity<>("User registerd success!" ,HttpStatus.OK);
+                user.setPassword(null);
+                return ResponseEntity.ok()
+                        .header(
+                                HttpHeaders.AUTHORIZATION,
+                                jwtUtil.generateToken(user)
+                        )
+                        .body(user);
             } catch (BadCredentialsException ex) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
+//            try {
+//
+//
+////            if(userServiceDetailsImpl.loadUserByUsername(registerDto.getUsername())){
+////                return new ResponseEntity<>("username is taken!", HttpStatus.BAD_REQUEST);
+////            }
+//                passwordEncoder = new BCryptPasswordEncoder();
+//            UserEntity user = new UserEntity();
+//            user.setUsername(registerDto.getUsername());
+//            user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
+////            user.setRole(registerDto.getRole());
+////            Role roles = roleRepository.findByName("USER").get();
+////            user.setRoles(Collections.singletonList(roles));
+////                user.setAuthorities();
+//
+////            userRepository.save(user);
+//                userServiceDetailsImpl.registerNewUser(user);
+//            return new ResponseEntity<>("User registerd success!" ,HttpStatus.OK);
+//            } catch (BadCredentialsException ex) {
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//            }
         }
 
 

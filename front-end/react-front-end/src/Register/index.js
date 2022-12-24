@@ -3,11 +3,13 @@ import React ,{useState} from 'react';
 const Register = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+    const [role,setRole] =useState("");
 
     function submitRegister(){
         const reqBody={
             username : username,
             password : password,
+            // role: role,
         //   "username" :"joakim",
         //   "password" :1234
         };  
@@ -16,13 +18,13 @@ const Register = () => {
                 "Content-Type": "application/json"
             },
             method:"POST",
-            body: JSON.stringify(reqBody),
-          }).then((response) =>{
-            if(response.status == 200){
-                return Promise.all("Succsessful!"),
-                window.location.href='login'
-            }
-        })
+            body: JSON.stringify(reqBody)
+        //   }).then((response) =>{
+        //     if(response.status == 200){
+        //         return Promise.all("Succsessful!"),
+        //         window.location.href='login'
+        //     }
+        // })
         //     .then((response) => {
         //       if(response.status == 200){
 
@@ -32,7 +34,7 @@ const Register = () => {
         //       else
         //           return Promise.reject("Invalid login attempt"); 
         //   })
-    }
+        })}
 
     return (
         <>
@@ -46,6 +48,8 @@ const Register = () => {
                 <label htmlFor='password'>Password</label>
                 <input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                 </div>
+                
+                
                 <button onClick={()=>submitRegister()}>Submit Register</button>
         </div>
         </>

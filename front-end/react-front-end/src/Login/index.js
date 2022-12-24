@@ -48,6 +48,7 @@ const Login = () => {
     }
     return (
         <>
+        <h2>Login</h2>
         <div>
             <label htmlFor='username'>Username</label>
             <input type="email" id="username" value={username} onChange={(event) => setUsername(event.target.value)} />
@@ -56,6 +57,7 @@ const Login = () => {
         <label htmlFor='password'>Password</label>
             <input type="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
         </div>
+       
         <div>
             <button id ="submit" type="button" onClick={() => sendLoginRequest()}>Login</button>
             <button id ="registrer" type="button"onClick={()=> goToRegister()} >Registrer</button>
