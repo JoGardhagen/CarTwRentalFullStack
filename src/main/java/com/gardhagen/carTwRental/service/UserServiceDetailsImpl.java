@@ -27,4 +27,5 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 
 
     }
+    public UserEntity registerNewUser(UserEntity userEntity){return userRepository.save(userEntity);}
 }

@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard";
 import Homepage from './Homepage';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
+import Register from './Register';
 import { useLocalState } from './util/useLocalStorage';
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
       />
       <Route path="/" element={ <Homepage/> }/>
       <Route path="/login" element={<Login/>}/>
-
+      <Route path='/register' element={<Register/>}/>
       
     </Routes>
     

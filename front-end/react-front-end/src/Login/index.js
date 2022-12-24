@@ -9,7 +9,9 @@ const Login = () => {
     const [jwt,setJwt] =useLocalState("","jwt");
 
     // console.log(username);
-
+    function goToRegister(){
+        window.location.href='register';
+    };
     function sendLoginRequest(){
         console.log("Im sending a request!");
  
@@ -29,7 +31,7 @@ const Login = () => {
     })
       .then((response) => {
         if(response.status == 200)
-            return Promise.all([response.json(), response.headers])
+            return Promise([response.json(), response.headers])
         else
             return Promise.reject("Invalid login attempt"); 
     })
@@ -56,6 +58,7 @@ const Login = () => {
         </div>
         <div>
             <button id ="submit" type="button" onClick={() => sendLoginRequest()}>Login</button>
+            <button id ="registrer" type="button"onClick={()=> goToRegister()} >Registrer</button>
         </div>
         </>
     );
