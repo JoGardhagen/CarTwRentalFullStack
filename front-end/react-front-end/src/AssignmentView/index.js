@@ -74,7 +74,9 @@ const AssignmentView = () => {
             
         });
     },[])
-  
+   const onOptionChangeHandler = (e) =>{
+        console.log(" Has selected -",e.target.value);
+   }
     
     return (
         <div>
@@ -91,14 +93,29 @@ const AssignmentView = () => {
                 />
                 </h3>
                 <button onClick={()=> save()}>Submit assignment</button>
-                <div>
+                <ul>
                     {cars.map(car=>(
-                        <div key={car.id}>
-                            {car.brand}
-                            {car.modelYear}
-                            {car.rentalPrice}
-                        </div>
+                        <li key={car.id}>
+                            {car.id +" "}
+                            {car.brand +" "}
+                            {car.modelYear+" "}
+                            {car.rentalPrice+" "}
+                        </li>
                     ))}
+                </ul>
+                <div>
+                    <select onChange={onOptionChangeHandler}>
+                        <option>Choose a car</option>
+                        {cars.map((car,index) =>{
+                            return<option key={car.id}>// för att hitta bilen behövs car.id
+                                
+                                {car.id +" "}
+                                {car.brand +" "}
+                                {car.modelYear+" "}
+                                {car.rentalPrice+" "}
+                                </option>
+                        })}
+                    </select>
                 </div>
             </>
             ) : ( 
