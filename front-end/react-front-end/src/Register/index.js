@@ -4,6 +4,7 @@ const Register = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [role,setRole] =useState("");
+    // const user = useUser
 
     function submitRegister(){
         const reqBody={
@@ -18,21 +19,21 @@ const Register = () => {
                 "Content-Type": "application/json"
             },
             method:"POST",
-            body: JSON.stringify(reqBody)
+            body: JSON.stringify(reqBody),
         //   }).then((response) =>{
         //     if(response.status == 200){
         //         return Promise.all("Succsessful!"),
         //         window.location.href='login'
         //     }
         // })
-        //     .then((response) => {
-        //       if(response.status == 200){
+        }).then((response) => {
+              if(response.status == 200){
 
-        //           return Promise.all([response.json(),response.headers])
-        //         //   window.location.href='login'
-        //       }
-        //       else
-        //           return Promise.reject("Invalid login attempt"); 
+                  return new Promise.all([response.json(),response.headers])
+                //   window.location.href='login'
+              }
+              else
+                  return new Promise.reject("Invalid login attempt"); 
         //   })
         })}
 

@@ -26,7 +26,7 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userEntity")
-////    @JsonIgnore
+    @JsonIgnore
     private List<Authority> authorities = new ArrayList<>();
 
 //    @Enumerated(EnumType.STRING)

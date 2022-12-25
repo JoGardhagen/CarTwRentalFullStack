@@ -31,7 +31,7 @@ const Login = () => {
     })
       .then((response) => {
         if(response.status == 200)
-            return Promise([response.json(), response.headers])
+            return Promise.all([response.json(), response.headers])
         else
             return Promise.reject("Invalid login attempt"); 
     })

@@ -1,7 +1,9 @@
 package com.gardhagen.carTwRental.service;
 
 import com.gardhagen.carTwRental.dto.UserDto;
+import com.gardhagen.carTwRental.model.Authority;
 import com.gardhagen.carTwRental.model.UserEntity;
+import com.gardhagen.carTwRental.repository.AuthorityRepository;
 import com.gardhagen.carTwRental.repository.UserRepository;
 import com.gardhagen.carTwRental.util.CustomPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -32,6 +37,7 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 
     }
     public UserEntity registerNewUser(UserEntity userEntity){return userRepository.save(userEntity);}
+
     public void createUser(UserDto userDto) {
         passwordEncoder = new BCryptPasswordEncoder();
         UserEntity newUser = new UserEntity();
@@ -41,10 +47,10 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 //        newUser.setPassword(passwordEncoder.encode((userDto.getPassword())));
         newUser.setPassword(encodedPassword);
         userRepository.save(newUser);
-//        Authorities authority = new Authorities();
-//        authority.setAuthority("ROLE_STUDENT");
-//        authority.setUser(newUser);
-//        authorityRepo.save(authority);
+        Authority authority = new Authority();
+        authority.setAuthority("ROLE_USER");
+        authority.setUserEntity(newUser);
+        authorityRepository.save(authority);
 
     }
 }
