@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -45,6 +46,7 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 //        newUser.setName(userDto.getName());
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
 //        newUser.setPassword(passwordEncoder.encode((userDto.getPassword())));
+        newUser.setCreatedAt(LocalDate.now());
         newUser.setPassword(encodedPassword);
         userRepository.save(newUser);
         Authority authority = new Authority();
