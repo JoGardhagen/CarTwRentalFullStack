@@ -36,7 +36,7 @@ public class AssignmentController {
         return ResponseEntity.ok(assignmentOpt.orElse(new Assignment()));
 //        return ResponseEntity.ok(assignmentService.findByUserEntity(user));
     }
-    @PutMapping({"assignmentId"})
+    @PutMapping({"{assignmentId}"})
     public ResponseEntity<?> updateAssignment(@PathVariable Long assignmentId,
             @RequestBody Assignment assignment,
             @AuthenticationPrincipal UserEntity user){
