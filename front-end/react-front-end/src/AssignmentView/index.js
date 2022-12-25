@@ -8,8 +8,34 @@ const AssignmentView = () => {
         branch: "",
         githubUrl:"",
     });
+    
+    const[carItem,setCarItem] = useState([]);
     // const [gitHubUrl,setGitHubUrl] = useState("");
     // const [branch,setBranch] = useState("");
+    const [cars,setCars]=useState([]);
+
+    // const fetchData = () =>{
+    //     return fetch("/api/v1/cars",)
+    //     .then((response)=>response.json())
+    //     .then(data=> setCars(data));
+
+    // }
+    // useEffect(()=>{
+    //     fetchData();
+    // })
+    useEffect(()=>{
+        fetch("/api/v1/cars",{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method :"GET",
+        }).then((response)=>{
+            if(response.status === 200) return response.json(); 
+        }).then(data=> setCars(data));
+        
+    },[]);
+
 
     function updateAssignment(prop,value){
         const newAssignment = {...assignment};
@@ -48,7 +74,8 @@ const AssignmentView = () => {
             
         });
     },[])
-    //<h3>GitHub URL: <input type="url" id="gitHubUrl" onChange={(e)=> setGitHubUrl(e.target.value)}/>
+  
+    
     return (
         <div>
             <h1>Assignment {assignmentId}</h1>  
@@ -64,6 +91,15 @@ const AssignmentView = () => {
                 />
                 </h3>
                 <button onClick={()=> save()}>Submit assignment</button>
+                <div>
+                    {cars.map(car=>(
+                        <div key={car.id}>
+                            {car.brand}
+                            {car.modelYear}
+                            {car.rentalPrice}
+                        </div>
+                    ))}
+                </div>
             </>
             ) : ( 
             <></>

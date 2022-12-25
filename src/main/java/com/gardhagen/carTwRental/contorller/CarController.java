@@ -1,10 +1,12 @@
 package com.gardhagen.carTwRental.contorller;
 
 import com.gardhagen.carTwRental.model.Car;
+import com.gardhagen.carTwRental.model.UserEntity;
 import com.gardhagen.carTwRental.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,17 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/cars")
+    @GetMapping("/car")
     public List<Car>getCar(){return carService.getAllCars();}
+
+//    @GetMapping("/cars")
+//    public ResponseEntity<?> getAllCars(@AuthenticationPrincipal UserEntity user){
+//        return ResponseEntity.ok(carService.getAllCars());
+//    }
+    @GetMapping("/cars")
+    public ResponseEntity<?> getAllCars(@AuthenticationPrincipal UserEntity user){
+        return ResponseEntity.ok(carService.getAllCars());
+    }
 
     @PostMapping("/addcar")
     public ResponseEntity<Car> addCar(@RequestBody Car car){
