@@ -29,7 +29,12 @@ public class ReservationController {
 //    public ReservationController(ReservationService reservationService){this.reservationService = reservationService;}
 
     @GetMapping("/myorders")
-    public List<Reservation> getAllRents(){return reservationService.getAllRents();}
+    public ResponseEntity<?> getReservation(@AuthenticationPrincipal UserEntity user){
+        return ResponseEntity.ok(reservationService.findByUserEntity(user));
+    }
+
+//    @GetMapping("/myorders")
+//    public List<Reservation> getAllRents(){return reservationService.getAllRents();}
 //    @PostMapping("/ordercar")
 //    public ResponseEntity<Reservation> addRent(@RequestBody Reservation reservation){
 //        return new ResponseEntity<Reservation>(reservationService.addRent(reservation), HttpStatus.CREATED);

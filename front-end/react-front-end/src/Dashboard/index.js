@@ -7,6 +7,23 @@ const Dashboard = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
 
     const [assignments,setAssignments] = useState(null);
+    const [reservations,setReservations] = useState([]);
+
+    useEffect(()=>{
+        fetch("api/v1/myorders",{
+            headers:{
+                "Content-Type" : "application/json",
+                "Authorization": `Bearer ${jwt}`
+            },
+            method: "GET",
+        }).then(response =>{
+            if(response.status === 200)return response.json();
+        }).then((reservationData)=>{
+            setReservations(reservationData);
+            console.log(reservationData);
+        })
+    },[])
+
 
     useEffect(() =>{
         fetch("api/assignments",{
@@ -42,6 +59,49 @@ const Dashboard = () => {
     function sendMeToCars(){
         window.location.href = "/cars";
     }
+    function useless(){
+        <ul>
+        {reservations.map(reservation=>(
+            <li key={reservation.id}>
+                {reservation.id +" "}
+                {reservation.car +" "}
+                {reservation.userEntity+" "}
+                {reservation.rentalDays+" "}
+                {reservation.bookingDate+" "}
+                {reservation.active }
+            </li>
+        ))}
+        <select onChange={onOptionChangeHandler}>
+                        <option>Choose a car</option>
+                        {reservations.map((reservation,index) =>{
+                            return<option key={reservation.id}>
+                                
+                                {reservation.id +" "}
+                                {reservation.car +" "}
+                                {reservation.userEntity+" "}
+                                {reservation.rentalDays+" "}
+                                {reservation.bookingDate+" "}
+                                {reservation.active }
+                                </option>
+                        })}
+                    </select>
+                    <select onChange={onOptionChangeHandler}>
+                        <option>Choose a car</option>
+                        {reservations.map((reservation,index) =>{
+                            return<option key={reservation.id}>
+                                
+                                {reservation.id +" "}
+                                {reservation.car +" "}
+                                {reservation.userEntity+" "}
+                                {reservation.rentalDays+" "}
+                                {reservation.bookingDate+" "}
+                                {reservation.active }
+                                </option>
+                        })}
+                    </select>
+    </ul>
+    
+    }
     function createNewReservation(){
         console.log("New Reservation");
         fetch("/api/v1/ordercar",{
@@ -50,9 +110,13 @@ const Dashboard = () => {
                 Authorization : `Bearer ${jwt}`,
             },
             method:"POST",
+            
         }).then(response =>{
             if(response.status === 200) return response.json();
         });
+    }
+    const onOptionChangeHandler = (e) => {
+        console.log("hit");
     }
     return (
         <div className='NavBar'>
@@ -71,8 +135,36 @@ const Dashboard = () => {
              )) : (
              <></>
              )}
+              {reservations?reservations.map((reservation)=>{
+                <div><Link to  = {"/reservation"}>
+                    reservation {reservation.id}</Link></div>
+             }) : (
+                <></>
+             )}
+             <div>
+             <ul>
+             {reservations.map(reservation=>(
+            <li key={reservation.id}>
+                {reservation.id +" "}
+                {reservation.car.id +" "}
+                {reservation.car.brand +" "}
+                {reservation.car.modelYear +" "}
+                {reservation.car.rentalPrice +" "}
+                {reservation.userEntity.id+" "}
+                {reservation.userEntity.username+" "}
+                {reservation.rentalDays+" "}
+                {reservation.bookingDate+" "}
+                {reservation.active }
+            </li>
+        ))}
+            </ul>
+             </div>
+             
+            
+
             <button onClick={()=> createAssignment()}>Submit new Assignment</button>
             <button onClick={()=> createNewReservation()}>New Reservation</button>
+            
         </div>
         </div>
         
