@@ -38,6 +38,7 @@ public class Car {
         this.rentalPrice = rentalPrice;
     }
 
+
     public Car(long id) {
         this.id = id;
     }

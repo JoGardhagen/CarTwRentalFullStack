@@ -9,6 +9,20 @@ const AssignmentView = () => {
         branch: "",
         githubUrl:"",
     });
+    const [reserverationBody,setReservationBody] = useState({
+        id: "",
+        brand: "",
+        modelYear: "",
+        rentalPrice:""
+    });
+    // 
+
+    const [id,setId] = useState("");
+    const [brand,setBrand] = useState("");
+    const [modelYear,setModelYear] = useState("");
+    const [rentalPrice,setRentalPrice]= useState("");
+    const carBody = {id,brand,modelYear,rentalPrice};
+
     
     const[carItem,setCarItem] = useState([]);
     // const [gitHubUrl,setGitHubUrl] = useState("");
@@ -44,6 +58,12 @@ const AssignmentView = () => {
         setAssignment(newAssignment);
         console.log(assignment);
     }
+    function updateReservation(prop,value){
+        const newReservationOrder = {...reserverationBody};
+        newReservationOrder[prop] = value;
+        setReservationBody(newReservationOrder)
+        console.log(reserverationBody);
+    }
     function save(){
         fetch(`/api/assignments/${assignmentId}`,{
             headers:{
@@ -76,13 +96,101 @@ const AssignmentView = () => {
         });
     },[])
    const onOptionChangeHandler = (e) =>{
-        console.log(" Has selected -",e.target.value);
+        // console.log(" Has selected -",e.target.value.split(" "));
+        // data = e.target.value.split(" ");
+        
+        selectedCar(e.target.value.split(" "));
+
+        // setId(e.target.value.split(" ")[0]);
+        // setBrand(e.target.value.split(" ")[1]);
+        // setModelYear(e.target.value.split(" ")[2]);
+        // setRentalPrice(e.target.value.split(" ")[3]);
+
+        // console.log(carBody);
+        // e.target.value.split(" ");
+        // updateReservation("id",e.target.value.split(" ")[0])
+       
+        // const data = e.target.value.split(" ");
+        // data.forEach(element => {
+            // updateReservation("id",e.target.value.split(" ")[0]);
+            // updateReservation("brand",e.target.value.split(" ")[1]);
+            // updateReservation("modelYear",e.target.value.split(" ")[2]);
+            // updateReservation("rentalPrice",e.target.value.split(" ")[3]);
+        // });
+        // for(var i = 0; i > data.lenght; i ++){
+        //     console.log(data[i]);
+        // {cars.map((car,index) =>{
+
+        //     updateReservation("id",car.id)
+        //     updateReservation("brand",car.brand);
+        //     updateReservation("modelYear",car.modelYear);
+        //     updateReservation("rentalPrice",car.rentalPrice);
+        //         // {car.id +" "}
+        //         // {car.brand +" "}
+        //         // {car.modelYear+" "}
+        //         // {car.rentalPrice+" "}
+                
+        // })}
+            
+        // }
+        // updateReservation("id",data[0]);
+        // updateReservation("brand",data[1]);
+        // updateReservation("modelYear",data[2]);
+        // updateReservation("rentalPrice",data[3]);
+        
+        
+        //console.log(data);
+        //setReservationBody(JSON.stringify(data));
+        // toObject(data);
+        // setCarItem(e.target.value.split(" "));
+        // let i = 0;
+        // carItem.forEach(element => {
+        //     console.log(element)
+        //     // setReservationBody[i]  = element ;
+        //     // i++;
+        // });
+        // // const myArray = carItem;
+        // // console.log(carItem);  
+        // // // console.log(toObject(carItem)); 
+        // // toObject(myArray);
+        // var arObj = setReservationBody;
+        // console.log(reserverationBody);
+        
+        
+    }
+    function selectedCar(data){
+        setId(data[0]);
+        setBrand(data[1]);
+        setModelYear(data[2]);
+        setRentalPrice(data[3]);
+
+        console.log(carBody);
+    }
+   function toObject(array){
+    var arObj = setReservationBody;
+    for (var i =0 ; i <array.lenght; i++){
+        arObj[i] = array[i];
+    }
+    return arObj
    }
     function sendMeHome(){
         window.location.href = "/";
     }
     function sendMeToReservation(){
         window.location.href ="/dashboard";
+    }
+    function createNewReservation(){
+        console.log("New Reservation");
+        fetch("/api/v1/ordercar",{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method:"POST",
+            body: JSON.stringify(carBody)
+        }).then(response =>{
+            if(response.status === 200) return response.json();
+        });
     }
     return (
         <div>
@@ -119,6 +227,9 @@ const AssignmentView = () => {
                                 </option>
                         })}
                     </select>
+                </div>
+                <div>
+                    <button onClick={(e)=> createNewReservation()}>New Reservation</button>
                 </div>
             </>
             ) : ( 

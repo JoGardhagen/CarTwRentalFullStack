@@ -1,14 +1,18 @@
 package com.gardhagen.carTwRental.service;
 
 
+import com.gardhagen.carTwRental.dto.ReservationDto;
 import com.gardhagen.carTwRental.exception.ResourceNotFoundException;
 import com.gardhagen.carTwRental.model.Reservation;
 import com.gardhagen.carTwRental.model.UserEntity;
+import com.gardhagen.carTwRental.repository.CarRepository;
 import com.gardhagen.carTwRental.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,6 +21,8 @@ import java.util.stream.Collectors;
 public class ReservationService implements ReservationServiceInterface {
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private CarRepository carRepository;
 
     public Set<Reservation> findByUserEntity(UserEntity user) {
         return reservationRepository.findByUserEntity(user);
@@ -24,6 +30,20 @@ public class ReservationService implements ReservationServiceInterface {
 
 //    @Autowired
 //    private RestTemplate restTemplate;
+    public void createReservation(ReservationDto reservationDto){
+        Reservation reservation = new Reservation();
+        reservation.setCar(reservationDto.getCar());
+        reservation.setUserEntity(reservationDto.getUser());
+        reservation.setBookingDate(Date.valueOf(LocalDate.now()));
+
+        reservationRepository.save(reservation);
+    }
+    public Reservation save(UserEntity user){
+        Reservation reservation = new Reservation();
+        reservation.setCar(carRepository.findCarById(1));
+        reservation.setUserEntity(user);
+        return reservationRepository.save(reservation);
+    }
 
     @Override
     public Reservation addRent(Reservation reservation) {

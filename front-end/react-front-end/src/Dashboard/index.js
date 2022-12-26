@@ -42,6 +42,18 @@ const Dashboard = () => {
     function sendMeToCars(){
         window.location.href = "/cars";
     }
+    function createNewReservation(){
+        console.log("New Reservation");
+        fetch("/api/v1/ordercar",{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method:"POST",
+        }).then(response =>{
+            if(response.status === 200) return response.json();
+        });
+    }
     return (
         <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
@@ -60,6 +72,7 @@ const Dashboard = () => {
              <></>
              )}
             <button onClick={()=> createAssignment()}>Submit new Assignment</button>
+            <button onClick={()=> createNewReservation()}>New Reservation</button>
         </div>
         </div>
         
