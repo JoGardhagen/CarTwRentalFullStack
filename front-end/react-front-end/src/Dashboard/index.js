@@ -36,9 +36,21 @@ const Dashboard = () => {
             window.location.href = `/assignments/${assignment.id}`;
         });
     }
-
+    function sendMeHome(){
+        window.location.href = "/";
+    }
+    function sendMeToCars(){
+        window.location.href = "/cars";
+    }
     return (
+        <div className='NavBar'>
+                <button onClick={(e)=>sendMeHome()}>Home</button>
+                <button onClick={(e)=>sendMeToCars()}>Cars</button>
+                <button>Reservation</button>
+                <button>Logout</button>
+            
         <div style={{margin:"2em"}}>
+            
             {/* <h1>Hello World!</h1>
             <div>JWT value is {jwt}</div> */}
             {assignments ? assignments.map((assignments) => (
@@ -48,6 +60,7 @@ const Dashboard = () => {
              <></>
              )}
             <button onClick={()=> createAssignment()}>Submit new Assignment</button>
+        </div>
         </div>
         
     );

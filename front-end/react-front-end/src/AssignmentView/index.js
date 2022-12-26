@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocalState } from "../util/useLocalStorage";
 
+
 const AssignmentView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const assignmentId = window.location.href.split("/assignment/")[1];
@@ -77,9 +78,20 @@ const AssignmentView = () => {
    const onOptionChangeHandler = (e) =>{
         console.log(" Has selected -",e.target.value);
    }
-    
+    function sendMeHome(){
+        window.location.href = "/";
+    }
+    function sendMeToReservation(){
+        window.location.href ="/dashboard";
+    }
     return (
         <div>
+            <div className='NavBar'>
+                <button onClick={(e)=>sendMeHome()}>Home</button>
+                <button>Cars</button>
+                <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button>Logout</button>
+            </div>
             <h1>Assignment {assignmentId}</h1>  
             {assignment ? (
             <>
@@ -93,16 +105,7 @@ const AssignmentView = () => {
                 />
                 </h3>
                 <button onClick={()=> save()}>Submit assignment</button>
-                <ul>
-                    {cars.map(car=>(
-                        <li key={car.id}>
-                            {car.id +" "}
-                            {car.brand +" "}
-                            {car.modelYear+" "}
-                            {car.rentalPrice+" "}
-                        </li>
-                    ))}
-                </ul>
+                
                 <div>
                     <select onChange={onOptionChangeHandler}>
                         <option>Choose a car</option>
