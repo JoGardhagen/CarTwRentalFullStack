@@ -107,7 +107,7 @@ const AssignmentView = () => {
                     <select onChange={onOptionChangeHandler}>
                         <option>Choose a car</option>
                         {cars.map((car,index) =>{
-                            return<option key={car.id}>// för att hitta bilen behövs car.id
+                            return<option key={car.id}>
                                 
                                 {car.id +" "}
                                 {car.brand +" "}
