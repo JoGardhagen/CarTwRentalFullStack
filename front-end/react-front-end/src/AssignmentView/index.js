@@ -15,7 +15,7 @@ const AssignmentView = () => {
         modelYear: "",
         rentalPrice:""
     });
-    // 
+
 
     const [id,setId] = useState("");
     const [brand,setBrand] = useState("");
@@ -25,19 +25,10 @@ const AssignmentView = () => {
 
     
     const[carItem,setCarItem] = useState([]);
-    // const [gitHubUrl,setGitHubUrl] = useState("");
-    // const [branch,setBranch] = useState("");
+  
     const [cars,setCars]=useState([]);
 
-    // const fetchData = () =>{
-    //     return fetch("/api/v1/cars",)
-    //     .then((response)=>response.json())
-    //     .then(data=> setCars(data));
-
-    // }
-    // useEffect(()=>{
-    //     fetchData();
-    // })
+    
     useEffect(()=>{
         fetch("/api/v1/cars",{
             headers:{
@@ -96,66 +87,10 @@ const AssignmentView = () => {
         });
     },[])
    const onOptionChangeHandler = (e) =>{
-        // console.log(" Has selected -",e.target.value.split(" "));
-        // data = e.target.value.split(" ");
+        
         
         selectedCar(e.target.value.split(" "));
 
-        // setId(e.target.value.split(" ")[0]);
-        // setBrand(e.target.value.split(" ")[1]);
-        // setModelYear(e.target.value.split(" ")[2]);
-        // setRentalPrice(e.target.value.split(" ")[3]);
-
-        // console.log(carBody);
-        // e.target.value.split(" ");
-        // updateReservation("id",e.target.value.split(" ")[0])
-       
-        // const data = e.target.value.split(" ");
-        // data.forEach(element => {
-            // updateReservation("id",e.target.value.split(" ")[0]);
-            // updateReservation("brand",e.target.value.split(" ")[1]);
-            // updateReservation("modelYear",e.target.value.split(" ")[2]);
-            // updateReservation("rentalPrice",e.target.value.split(" ")[3]);
-        // });
-        // for(var i = 0; i > data.lenght; i ++){
-        //     console.log(data[i]);
-        // {cars.map((car,index) =>{
-
-        //     updateReservation("id",car.id)
-        //     updateReservation("brand",car.brand);
-        //     updateReservation("modelYear",car.modelYear);
-        //     updateReservation("rentalPrice",car.rentalPrice);
-        //         // {car.id +" "}
-        //         // {car.brand +" "}
-        //         // {car.modelYear+" "}
-        //         // {car.rentalPrice+" "}
-                
-        // })}
-            
-        // }
-        // updateReservation("id",data[0]);
-        // updateReservation("brand",data[1]);
-        // updateReservation("modelYear",data[2]);
-        // updateReservation("rentalPrice",data[3]);
-        
-        
-        //console.log(data);
-        //setReservationBody(JSON.stringify(data));
-        // toObject(data);
-        // setCarItem(e.target.value.split(" "));
-        // let i = 0;
-        // carItem.forEach(element => {
-        //     console.log(element)
-        //     // setReservationBody[i]  = element ;
-        //     // i++;
-        // });
-        // // const myArray = carItem;
-        // // console.log(carItem);  
-        // // // console.log(toObject(carItem)); 
-        // // toObject(myArray);
-        // var arObj = setReservationBody;
-        // console.log(reserverationBody);
-        
         
     }
     function selectedCar(data){
