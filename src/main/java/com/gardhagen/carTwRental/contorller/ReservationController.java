@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1")
@@ -67,9 +68,10 @@ public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity u
     public ResponseEntity<Reservation> updateRent(@PathVariable("id")long id, @RequestBody Reservation reservation){
         return new ResponseEntity<Reservation>(reservationService.updateRent(reservation,id),HttpStatus.OK);
     }
-    @GetMapping("/myorder")
-    public ResponseEntity<?> getReservations(@AuthenticationPrincipal UserEntity user){
-        return ResponseEntity.ok(reservationService.findByUserEntity(user));
+    @GetMapping("/myorder/{id}")
+    public ResponseEntity<?> getReservations(@PathVariable("id") long reservationId,@AuthenticationPrincipal UserEntity user){
+        Optional<Reservation> reservationOpt = reservationService.findById(reservationId);
+        return ResponseEntity.ok(reservationOpt.orElse(new Reservation()));
     }
 //    @GetMapping("/exchange")
 //    public List<OrderCurrencyExchangeDTO> getTotalPriceExchanged(){ return reservationService.getTotalPriceExchanged();}

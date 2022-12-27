@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,9 @@ public class ReservationService implements ReservationServiceInterface {
         reservation.setUserEntity(user);
         return reservationRepository.save(reservation);
     }
-
+    public Optional<Reservation> findById(Long reservationId){
+        return reservationRepository.findById(reservationId);
+    }
     @Override
     public Reservation addRent(Reservation reservation) {
         return reservationRepository.save(reservation);

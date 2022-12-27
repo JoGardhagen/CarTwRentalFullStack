@@ -8,6 +8,7 @@ import Homepage from './Homepage';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import Register from './Register';
+import ReservartionView from './ReservationView';
 import { useLocalState } from './util/useLocalStorage';
 
 
@@ -46,6 +47,12 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/reservation/:id"
+        element={
+          <PrivateRoute>
+            <ReservartionView/>
+          </PrivateRoute>
+        }/>
       <Route path="/" element={ <Homepage/> }/>
       <Route path="/login" element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>

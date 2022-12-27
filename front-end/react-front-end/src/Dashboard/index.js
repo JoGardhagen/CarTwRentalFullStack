@@ -136,9 +136,16 @@ const Dashboard = () => {
              <></>
              )}
               {reservations?reservations.map((reservation)=>{
-                <div><Link to  = {"/reservation"}>
-                    reservation {reservation.id}</Link></div>
+                <div><Link to  = {`/reservation/${reservation.id}`}>
+                    Reservation : ID {" "+ reservation.id}</Link></div>
              }) : (
+                <></>
+             )}
+             {reservations?reservations.map(reservation =>(
+                <div>
+                    <Link to={`/reservation/${reservation.id}`}>Reservation : ID {reservation.id}</Link>
+                </div>
+             )):(
                 <></>
              )}
              <div>
