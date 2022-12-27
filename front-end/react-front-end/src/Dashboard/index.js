@@ -59,49 +59,7 @@ const Dashboard = () => {
     function sendMeToCars(){
         window.location.href = "/cars";
     }
-    function useless(){
-        <ul>
-        {reservations.map(reservation=>(
-            <li key={reservation.id}>
-                {reservation.id +" "}
-                {reservation.car +" "}
-                {reservation.userEntity+" "}
-                {reservation.rentalDays+" "}
-                {reservation.bookingDate+" "}
-                {reservation.active }
-            </li>
-        ))}
-        <select onChange={onOptionChangeHandler}>
-                        <option>Choose a car</option>
-                        {reservations.map((reservation,index) =>{
-                            return<option key={reservation.id}>
-                                
-                                {reservation.id +" "}
-                                {reservation.car +" "}
-                                {reservation.userEntity+" "}
-                                {reservation.rentalDays+" "}
-                                {reservation.bookingDate+" "}
-                                {reservation.active }
-                                </option>
-                        })}
-                    </select>
-                    <select onChange={onOptionChangeHandler}>
-                        <option>Choose a car</option>
-                        {reservations.map((reservation,index) =>{
-                            return<option key={reservation.id}>
-                                
-                                {reservation.id +" "}
-                                {reservation.car +" "}
-                                {reservation.userEntity+" "}
-                                {reservation.rentalDays+" "}
-                                {reservation.bookingDate+" "}
-                                {reservation.active }
-                                </option>
-                        })}
-                    </select>
-    </ul>
-    
-    }
+
     function createNewReservation(){
         console.log("New Reservation");
         fetch("/api/v1/ordercar",{
@@ -115,9 +73,7 @@ const Dashboard = () => {
             if(response.status === 200) return response.json();
         });
     }
-    const onOptionChangeHandler = (e) => {
-        console.log("hit");
-    }
+   
     return (
         <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
@@ -127,8 +83,7 @@ const Dashboard = () => {
             
         <div style={{margin:"2em"}}>
             
-            {/* <h1>Hello World!</h1>
-            <div>JWT value is {jwt}</div> */}
+
             {assignments ? assignments.map((assignments) => (
             <div><Link to = {`/assignment/${assignments.id}`}>
                 Assignment ID: {assignments.id}</Link></div>
