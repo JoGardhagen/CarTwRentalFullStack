@@ -5,7 +5,7 @@ const ReservartionView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const reservationId = window.location.href.split("/reservation/")[1];
     const [reservation,setReservation] = useState({
-
+        
     });
 
     useEffect(()=>{
