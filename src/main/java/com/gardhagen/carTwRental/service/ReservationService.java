@@ -1,6 +1,7 @@
 package com.gardhagen.carTwRental.service;
 
 
+import com.gardhagen.carTwRental.dto.JustDataReservationDto;
 import com.gardhagen.carTwRental.dto.ReservationDto;
 import com.gardhagen.carTwRental.exception.ResourceNotFoundException;
 import com.gardhagen.carTwRental.model.Reservation;
@@ -48,6 +49,10 @@ public class ReservationService implements ReservationServiceInterface {
     public Optional<Reservation> findById(Long reservationId){
         return reservationRepository.findById(reservationId);
     }
+//    public JustDataReservationDto jdrDto(Long reservatyion){
+//
+//        return jdrDto();
+//    }
     @Override
     public Reservation addRent(Reservation reservation) {
         return reservationRepository.save(reservation);

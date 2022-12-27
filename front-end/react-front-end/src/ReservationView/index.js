@@ -10,7 +10,11 @@ const ReservartionView = () => {
     const [carModelYear,setCarModelYear] = useState("");
     const [carRentalPrice,setCarRentalPrice]=useState("");
     const carBody = {carId,carBrand,carModelYear,carRentalPrice};
-    const [reservation,setReservation] = useState({});
+    const [car,setCar] = useState({});
+    const [userEntity,setUserEntity]= useState("")
+    const [reservation,setReservation] = useState({
+        car,userEntity
+    });
     // const [reservations,setReservations] = useState([]);
 
     // useEffect(()=>{
@@ -98,33 +102,20 @@ const ReservartionView = () => {
                 <button>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
                 <button>Logout</button>
-                <div>
-                {/* <h1>Reservation {reservationId}</h1> */}
-                {/* {reservation ?(
-                    <>
-                    <h2>Car Brand: {reservation.reservationId}</h2>
-                    </>):(
-                        <></>
-                )} */}
-            </div>
+                <div>  
+                <h2>Reservation for {reservation.userEntity.username}</h2>
+                    <h2>Rental Days: {reservation.rentalDays}</h2>
+                    <h2>Car :   {reservation.car.id +" "},
+                                {reservation.car.brand+" "}, 
+                                {reservation.car.modelYear+" "}, 
+                                {reservation.car.rentalPrice}
+                    </h2>
+                    <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
+                    
+                </div>
                         
             <div>
-            <ul>
-             {reservation.map(reservation=>(
-            <li key={reservation.id}>
-            {reservation.id +" "}
-            {reservation.car.id +" "}
-            {reservation.car.brand +" "}
-            {reservation.car.modelYear +" "}
-            {reservation.car.rentalPrice +" "}
-            {reservation.userEntity.id+" "}
-            {reservation.userEntity.username+" "}
-            {reservation.rentalDays+" "}
-            {reservation.bookingDate+" "}
-            {reservation.active }
-       </li>
-   ))}
-       </ul>
+    
             </div>
         </div>
         </div>
