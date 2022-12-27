@@ -68,6 +68,7 @@ const AssignmentView = () => {
             if(response.status ===200)return response.json();
         }).then(assignmentData =>{
             setAssignment(assignmentData);
+            console.log(assignmentData);
         });
     }
     useEffect(()=>{
