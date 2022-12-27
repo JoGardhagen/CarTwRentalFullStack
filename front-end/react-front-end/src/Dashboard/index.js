@@ -158,6 +158,45 @@ const Dashboard = () => {
             </li>
         ))}
             </ul>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>CAR ID</th>
+                            <th>BRAND</th>
+                            <th>YEAR</th>
+                            <th>PRICE</th>
+                            <th>ID_User</th>
+                            <th>NAME</th>
+                            <th>DAYS</th>
+                            <th>BOOKDATE</th>
+                            <th>ACTIVE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reservations.map((reservation,index)=>{
+                        return(
+                            <tr key={index}>
+                                <th scope="row">{reservation.id}</th>
+                                <td>{reservation.id +" "}</td>
+                                   <td> {reservation.car.id +" "}</td>             
+                                   <td> {reservation.car.brand +" "}  </td>           
+                                   <td> {reservation.car.modelYear +" "}   </td> 
+                                   <td> {reservation.car.rentalPrice +" "}  </td>
+                                   <td> {reservation.userEntity.id+" "}         </td>
+                                   <td> {reservation.userEntity.username+" "}   </td>
+                                   <td> {reservation.rentalDays+" "}    </td>
+                                   <td> {reservation.bookingDate+" "}   </td>
+                                   <td> {reservation.active }</td>
+
+                            </tr>
+                        )})}
+                    </tbody>
+                </table>
+            </div>
+
              </div>
              
             
