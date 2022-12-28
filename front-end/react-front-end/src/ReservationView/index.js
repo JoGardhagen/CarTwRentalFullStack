@@ -7,8 +7,11 @@ const ReservartionView = () => {
  
     const [car,setCar] = useState({});
     const [userEntity,setUserEntity]= useState("")
+    // const []
     const [reservation,setReservation] = useState({
-        car,userEntity
+        car,userEntity,
+        rentalDays:"",
+        
     });
     
     useEffect(()=>{
@@ -27,12 +30,12 @@ const ReservartionView = () => {
         });
     },[])
    
-    // function updateReservation(prop,value){
-    //     const newReservation = {...reservation};
-    //     newReservation[prop] = value;
-    //     setReservation(newReservation)
-    //     console.log(reservation);
-    // }
+    function updateReservation(prop,value){
+        const newReservation = {...reservation};
+        newReservation[prop] = value;
+        setReservation(newReservation)
+        console.log(reservation);
+    }
 
     function sendMeHome(){
         window.location.href = "/";
@@ -55,6 +58,9 @@ const ReservartionView = () => {
                 <h2>Reservation for {reservation.userEntity.username}</h2>
                 <h2>Date of Reservation {reservation.bookingDate}</h2>
                     <h2>Rental Days: {reservation.rentalDays}</h2>
+                    <h3>Days : <input type="text" id="rentalDays" pattern="[0-9]*" onChange={(e)=> updateReservation("rentalDays",e.target.value)}
+                    />
+                    </h3>
                     <h2>Car :   {reservation.car.id +" "},
                                 {reservation.car.brand+" "}, 
                                 {reservation.car.modelYear+" "}, 
@@ -63,7 +69,7 @@ const ReservartionView = () => {
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
                     
                 </div>
-                        
+                    <button>Update this Reservation</button>    
             <div>
     
             </div>
