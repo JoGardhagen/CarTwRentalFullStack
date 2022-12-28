@@ -49,6 +49,11 @@ public class ReservationController {
 //        return ResponseEntity.ok(newReservation);
 //
 //    }
+//    @PostMapping("/ordercar")
+//    public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Reservation reservation){
+//        reservationService.creatAndSaveReservation(reservation);
+//        return ResponseEntity.ok(reservation);
+//    }
 @PostMapping("/ordercar")
 public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Car car){
     ReservationDto newReservation = new ReservationDto();
@@ -56,6 +61,7 @@ public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity u
     newReservation.setUser(user);
 //    Reservation newReservation = reservationService.save(user);
     reservationService.createReservation(newReservation);
+
     return ResponseEntity.ok(newReservation);
 
 }

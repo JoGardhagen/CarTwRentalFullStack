@@ -27,7 +27,15 @@ const AssignmentView = () => {
     const[carItem,setCarItem] = useState([]);
   
     const [cars,setCars]=useState([]);
-
+    const [car,setCar] = useState({});
+    const [userEntity,setUserEntity]= useState("");
+    const [rentalDays,setRentalDays]= useState(""); 
+    // const []
+    const [reservation,setReservation] = useState({
+        carBody,
+        rentalDays:"",
+        
+    });
     
     useEffect(()=>{
         fetch("/api/v1/cars",{
@@ -50,7 +58,7 @@ const AssignmentView = () => {
         console.log(assignment);
     }
     function updateReservation(prop,value){
-        const newReservationOrder = {...reserverationBody};
+        const newReservationOrder = {...reservation};
         newReservationOrder[prop] = value;
         setReservationBody(newReservationOrder)
         console.log(reserverationBody);
@@ -88,10 +96,12 @@ const AssignmentView = () => {
         });
     },[])
    const onOptionChangeHandler = (e) =>{
-        
+        // updateReservation("id",e.target.value.split("")[0]);
         
         selectedCar(e.target.value.split(" "));
-
+        setCar(carBody);
+        setReservation(carBody);
+        
         
     }
     function selectedCar(data){
@@ -99,7 +109,10 @@ const AssignmentView = () => {
         setBrand(data[1]);
         setModelYear(data[2]);
         setRentalPrice(data[3]);
-
+        // updateReservation("id",data[0]);
+        // updateReservation("brand",data[1]);
+        // updateReservation("modelYear",data[2]);
+        console.log(car);
         console.log(carBody);
     }
    function toObject(array){
@@ -126,8 +139,32 @@ const AssignmentView = () => {
             body: JSON.stringify(carBody)
         }).then(response =>{
             if(response.status === 200) return response.json();
-        });
-        sendMeToReservation();
+        }).then((reservationData)=>{
+            // window.location.href =`/reservation/${reservationData.id}`;
+            console.log(reservationData);
+            sendMeToReservation();
+        })
+        // sendMeToReservation();
+    }
+    function useless(){
+        <select onChange={onOptionChangeHandler}>
+                        <option>Choose a car</option>
+                        {cars.map((car,index) =>{
+                            return<option key={car.id}>
+                                
+                                {car.id +" "}
+                                {car.brand +" "}
+                                {car.modelYear+" "}
+                                {car.rentalPrice+" "}
+                                </option>
+                        })}
+                    </select>
+    }
+    function carSelected(prop,value){
+        const newCar = {...car};
+        newCar[prop] = value;
+        setCar(newCar);
+        console.log(car);
     }
     return (
         <div>
@@ -150,7 +187,9 @@ const AssignmentView = () => {
                 />
                 </h3>
                 <button onClick={()=> save()}>Submit assignment</button>
-                
+                <h3>
+                    Days To Rental : <input type="text" id ="rentalDays" onChange={(e)=>updateReservation("rentalDays",e.target.value)}/>
+                </h3>
                 <div>
                     <select onChange={onOptionChangeHandler}>
                         <option>Choose a car</option>

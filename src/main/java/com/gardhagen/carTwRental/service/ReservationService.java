@@ -30,6 +30,10 @@ public class ReservationService implements ReservationServiceInterface {
         return reservationRepository.findByUserEntity(user);
     }
 
+    public void creatAndSaveReservation(Reservation reservation){
+        reservation.setBookingDate(Date.valueOf(LocalDate.now()));
+        reservationRepository.save(reservation);
+    }
 //    @Autowired
 //    private RestTemplate restTemplate;
     public void createReservation(ReservationDto reservationDto){
