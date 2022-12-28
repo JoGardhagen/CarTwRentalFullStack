@@ -86,7 +86,9 @@ public class ReservationService implements ReservationServiceInterface {
         reservationOrder.setActive(reservation.isActive());
         return reservationOrder;
     }
-
+    public Reservation updateReservation(Reservation reservation){
+        return reservationRepository.save(reservation);
+    }
     @Override
     public void deleteRent(long id) {
     }

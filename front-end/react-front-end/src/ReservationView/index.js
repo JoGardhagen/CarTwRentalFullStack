@@ -36,6 +36,22 @@ const ReservartionView = () => {
         setReservation(newReservation)
         console.log(reservation);
     }
+    function updateReservationFunc(){
+        fetch(`/api/v1/myorder/${reservationId}`,{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method:"PUT",
+            body: JSON.stringify(reservation),
+
+        }).then(response => {
+            if(response.status ===200)return response.json();
+        }).then(reservationData =>{
+            setReservation(reservationData);
+            console.log(reservation);
+        });
+    }
 
     function sendMeHome(){
         window.location.href = "/";
@@ -69,7 +85,7 @@ const ReservartionView = () => {
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
                     
                 </div>
-                    <button>Update this Reservation</button>    
+                    <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button>    
             <div>
     
             </div>

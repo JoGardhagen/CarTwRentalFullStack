@@ -64,9 +64,16 @@ public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity u
         return new ResponseEntity<Reservation>(reservationService.updateRent(reservation,id),HttpStatus.OK);
     }
 
-    @PutMapping("/updateorder/{id}")
-    public ResponseEntity<Reservation> updateRent(@PathVariable("id")long id, @RequestBody Reservation reservation){
-        return new ResponseEntity<Reservation>(reservationService.updateRent(reservation,id),HttpStatus.OK);
+//    @PutMapping("/updateorder/{id}")
+//    public ResponseEntity<Reservation> updateRent(@PathVariable("id")long id, @RequestBody Reservation reservation){
+//        return new ResponseEntity<Reservation>(reservationService.updateRent(reservation,id),HttpStatus.OK);
+//    }
+    @PutMapping("/myorder/{id}")
+    public ResponseEntity<?>updateReservation(@PathVariable("id") long reservationId,
+                                       @AuthenticationPrincipal UserEntity user,
+                                       @RequestBody Reservation reservation){
+        Reservation updatetdReservation = reservationService.addRent(reservation);
+        return ResponseEntity.ok(updatetdReservation);
     }
     @GetMapping("/myorder/{id}")
     public ResponseEntity<?> getReservations(@PathVariable("id") long reservationId,@AuthenticationPrincipal UserEntity user){
