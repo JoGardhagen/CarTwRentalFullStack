@@ -9,6 +9,9 @@ const Homepage = () => {
     function sendMeToCars(){
         window.location.href = "/cars";
     }
+    function sendMeToReservation(){
+        window.location.href ="/dashboard";
+    }
     function logMeOut(){
         setJwt(null);
     }
@@ -18,7 +21,7 @@ const Homepage = () => {
         <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
-                <button>Reservation</button>
+                <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
                 <button onClick={(e)=>logMeOut()}>Logout</button>
                 </div>
         <h1>Homepage</h1>

@@ -127,6 +127,7 @@ const AssignmentView = () => {
         }).then(response =>{
             if(response.status === 200) return response.json();
         });
+        sendMeToReservation();
     }
     return (
         <div>

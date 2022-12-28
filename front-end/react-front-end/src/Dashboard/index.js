@@ -72,6 +72,24 @@ const Dashboard = () => {
         }).then(response =>{
             if(response.status === 200) return response.json();
         });
+        function useless(){
+            <ul>
+             {reservations.map(reservation=>(
+            <li key={reservation.id}>
+                {reservation.id +" "}
+                {reservation.car.id +" "}
+                {reservation.car.brand +" "}
+                {reservation.car.modelYear +" "}
+                {reservation.car.rentalPrice +" "}
+                {reservation.userEntity.id+" "}
+                {reservation.userEntity.username+" "}
+                {reservation.rentalDays+" "}
+                {reservation.bookingDate+" "}
+                {reservation.active }
+            </li>
+        ))}
+            </ul>
+        }
     }
    
     return (
@@ -104,22 +122,7 @@ const Dashboard = () => {
                 <></>
              )}
              <div>
-             <ul>
-             {reservations.map(reservation=>(
-            <li key={reservation.id}>
-                {reservation.id +" "}
-                {reservation.car.id +" "}
-                {reservation.car.brand +" "}
-                {reservation.car.modelYear +" "}
-                {reservation.car.rentalPrice +" "}
-                {reservation.userEntity.id+" "}
-                {reservation.userEntity.username+" "}
-                {reservation.rentalDays+" "}
-                {reservation.bookingDate+" "}
-                {reservation.active }
-            </li>
-        ))}
-            </ul>
+             
             <div>
                 <table>
                     <thead>
@@ -164,7 +167,7 @@ const Dashboard = () => {
             
 
             <button onClick={()=> createAssignment()}>Submit new Assignment</button>
-            <button onClick={()=> createNewReservation()}>New Reservation</button>
+            {/* <button onClick={()=> createNewReservation()}>New Reservation</button> */}
             
         </div>
         </div>

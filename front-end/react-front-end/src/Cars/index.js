@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { useLocalState } from "../util/useLocalStorage";
+import "./cars.css"
 
 const Cars = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
@@ -46,6 +47,9 @@ const Cars = () => {
                         </li>
                     ))}
                 </ul>
+                <div>
+
+                </div>
         </div>
     );
 };
