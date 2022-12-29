@@ -18,34 +18,36 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/car")
-    public List<Car>getCar(){return carService.getAllCars();}
+//    @GetMapping("/car")
+//    public List<Car>getCar(){return carService.getAllCars();}
 
 //    @GetMapping("/cars")
 //    public ResponseEntity<?> getAllCars(@AuthenticationPrincipal UserEntity user){
 //        return ResponseEntity.ok(carService.getAllCars());
 //    }
+    @GetMapping("/car/{id}")
+    public ResponseEntity<?> getCar(@PathVariable("id")long carId,@AuthenticationPrincipal UserEntity user){
+        return ResponseEntity.ok(carService.getCarById(carId));
+    }
     @GetMapping("/cars")
     public ResponseEntity<?> getAllCars(@AuthenticationPrincipal UserEntity user){
         return ResponseEntity.ok(carService.getAllCars());
     }
-//    @PostMapping("/addcar")
-//    public ResponseEntity<?> addCar(@AuthenticationPrincipal UserEntity user , @RequestBody CarDto carDto){
-////        carService.createCar(carDto);
-//        Car car = new Car();
-//        car.setBrand(carDto.getBrand());
-//        car.setModelYear(carDto.getModelYear());
-//        car.setRentalPrice(carDto.getRentalPrice());
-////        carService.addCar(car);
-//        return ResponseEntity.ok(carService.addCar(car));
-//    }
+
     @PostMapping("/addcar")
     public ResponseEntity<Car> addCar(@AuthenticationPrincipal UserEntity user,@RequestBody Car car){
         return new ResponseEntity<Car>(carService.addCar(car), HttpStatus.CREATED);
     }
+//    @PutMapping("/updatecar/{id}")
+//    public ResponseEntity<Car> updateCar(@PathVariable("id")long id,@RequestBody Car car){
+//        return new ResponseEntity<Car>(carService.updateCar(car,id),HttpStatus.OK);
+//    }
     @PutMapping("/updatecar/{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable("id")long id,@RequestBody Car car){
-        return new ResponseEntity<Car>(carService.updateCar(car,id),HttpStatus.OK);
+    public ResponseEntity<?> updateCar(@PathVariable("id")long carId,
+                                       @AuthenticationPrincipal UserEntity user,
+                                       @RequestBody Car car){
+        Car updatedCar = carService.addCar(car);
+        return  ResponseEntity.ok(updatedCar);
     }
     @DeleteMapping("/deletecar/{id}")
     public ResponseEntity<String> deleteCar(@PathVariable("id")Long id){

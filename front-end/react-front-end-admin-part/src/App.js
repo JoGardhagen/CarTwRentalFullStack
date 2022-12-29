@@ -10,6 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import Register from './Register';
 import ReservartionView from './ReservationView';
 import NewReservation from './NewReservation';
+import CarView from './CarView';
 import { useLocalState } from './util/useLocalStorage';
 
 
@@ -38,6 +39,11 @@ function App() {
       <Route path="/cars" element={
         <PrivateRoute>
           <Cars></Cars>
+        </PrivateRoute>
+      }/><Route path="/car/:id"
+      element={
+        <PrivateRoute>
+          <CarView/>
         </PrivateRoute>
       }/>
       <Route

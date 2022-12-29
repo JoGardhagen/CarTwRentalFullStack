@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from 'react';
+import { Link } from 'react-router-dom';
 import { useLocalState } from "../util/useLocalStorage";
 import "./cars.css"
 
@@ -66,7 +67,7 @@ const Cars = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         setCar(carBody)
-        alert(`The name you entered was: ${JSON.stringify(carBody)}`)
+        // alert(`The name you entered was: ${JSON.stringify(carBody)}`)
         console.log(carBody);
         registerNewCar();
         
@@ -92,6 +93,15 @@ const Cars = () => {
                         </li>
                     ))}
                 </ul>
+                <div>
+                {cars ? cars.map((car) => (
+            <div><Link to = {`/car/${car.id}`}>
+                Car ID: {car.id}{car.brand +" "}
+                            {car.modelYear+" "}
+                            {car.rentalPrice+" "}</Link></div>
+             )) : (
+             <></>
+             )}</div>
                 <div>
                     <form onSubmit={handleSubmit}>
                         <div>
