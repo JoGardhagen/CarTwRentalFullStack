@@ -4,13 +4,26 @@ import { useLocalState } from "../util/useLocalStorage";
 const ReservartionView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const reservationId = window.location.href.split("/reservation/")[1];
- 
-    const [car,setCar] = useState({});
+    const [cars,setCars]=useState([]);
+    const [car,setCar] = useState({
+        // id:"",brand:"",modelYear:"",rentalPrice:""
+    });
     const [userEntity,setUserEntity]= useState("")
+    // const [active,setActive] = useState(false);
     // const []
+    // const [id,setId] = useState("");
+    // const [brand,setBrand] = useState("");
+    // const [modelYear,setModelYear] = useState("");
+    // const [rentalPrice,setRentalPrice]= useState("");
+    // const carBody = {id,brand,modelYear,rentalPrice};
+    // const [carBody,setCarBody]= useState({
+    //     id:"",brand:"",modelYear:"",rentalPrice:"",
+    // });
     const [reservation,setReservation] = useState({
-        car,userEntity,
+        car,
+        userEntity,
         rentalDays:"",
+
         
     });
     
@@ -29,6 +42,18 @@ const ReservartionView = () => {
            
         });
     },[])
+    useEffect(()=>{
+        fetch("/api/v1/cars",{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method :"GET",
+        }).then((response)=>{
+            if(response.status === 200) return response.json(); 
+        }).then(data=> setCars(data));
+        
+    },[]);
    
     function updateReservation(prop,value){
         const newReservation = {...reservation};
@@ -51,6 +76,45 @@ const ReservartionView = () => {
             setReservation(reservationData);
             console.log(reservation);
         });
+    }
+
+    const onOptionChangeHandler = (e) =>{
+        // updateReservation("car",e.target);
+        
+
+        console.log(e.target.value.split(" ")[0]);
+        console.log(e.target.value.split(" ")[1]);
+        console.log(e.target.value.split(" ")[2]);
+        console.log(e.target.value.split(" ")[3]);
+        selectedCar(e.target.value.split(" "));
+        // setCar(carBody);
+        // setReservation(carBody);
+        // updateReservation("car",e.target.value.split(" ")[0],e.target.value.split(" ")[1],e.target.value.split(" ")[2]);
+        // updateCarBody("id",e.target.value.split(" ")[0]);
+        // updateCarBody("brand",e.target.value.split(" ")[1]);
+        // updateCarBody("modelYear",e.target.value.split(" ")[2]);
+        // updateCarBody("rentalPrice",e.target.value.split(" ")[3]);
+
+    }
+    function updateCarBody(prop,value){
+        const newCarBody = {...car};
+        newCarBody[prop] = value;
+        // setCarBody(newCarBody);
+        setCar(newCarBody);
+        console.log(car);
+    }
+
+    function selectedCar(data){
+        // setId(data[0]);
+        // setBrand(data[1]);
+        // setModelYear(data[2]);
+        // setRentalPrice(data[3]);
+        updateReservation("car.id",data[0]);
+        updateReservation("car.brand",data[1]);
+        updateReservation("car.modelYear",data[2]);
+        updateReservation("car.rentalPrice",data[3]);
+        // console.log(car);
+        // console.log(carBody);
     }
 
     function sendMeHome(){
@@ -83,9 +147,21 @@ const ReservartionView = () => {
                                 {reservation.car.rentalPrice}
                     </h2>
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
-                    
+                    <h2>Is active : {reservation.active}</h2>
                 </div>
-                    <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button>    
+                    <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button> 
+                    {/* <select onChange={onOptionChangeHandler}>
+                        <option>Choose a car</option>
+                        {cars.map((car,index) =>{
+                            return<option key={car.id}>
+                                
+                                {car.id +" "}
+                                {car.brand +" "}
+                                {car.modelYear+" "}
+                                {car.rentalPrice+" "}
+                                </option>
+                        })}
+                    </select>    */}
             <div>
     
             </div>

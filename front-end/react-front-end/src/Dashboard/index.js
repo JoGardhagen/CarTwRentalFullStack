@@ -102,25 +102,7 @@ const Dashboard = () => {
         <div style={{margin:"2em"}}>
             
 
-            {assignments ? assignments.map((assignments) => (
-            <div><Link to = {`/assignment/${assignments.id}`}>
-                Assignment ID: {assignments.id}</Link></div>
-             )) : (
-             <></>
-             )}
-              {reservations?reservations.map((reservation)=>{
-                <div><Link to  = {`/reservation/${reservation.id}`}>
-                    Reservation : ID {" "+ reservation.id}</Link></div>
-             }) : (
-                <></>
-             )}
-             {reservations?reservations.map(reservation =>(
-                <div>
-                    <Link to={`/reservation/${reservation.id}`}>Reservation : ID {reservation.id}</Link>
-                </div>
-             )):(
-                <></>
-             )}
+            
              <div>
              
             <div>
@@ -137,7 +119,7 @@ const Dashboard = () => {
                             <th>NAME</th>
                             <th>DAYS</th>
                             <th>BOOKDATE</th>
-                            <th>ACTIVE</th>
+                            <th>COST</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -154,20 +136,38 @@ const Dashboard = () => {
                                    <td> {reservation.userEntity.username+" "}   </td>
                                    <td> {reservation.rentalDays+" "}    </td>
                                    <td> {reservation.bookingDate+" "}   </td>
-                                   <td> {reservation.active }</td>
-
+                                   <td> {reservation.rentalDays * reservation.car.rentalPrice }</td>         
                             </tr>
                         )})}
                     </tbody>
                 </table>
             </div>
-                             
+            <button onClick={()=> createAssignment()}>Submit new Assignment</button>
+            {/* <button onClick={()=> createNewReservation()}>New Reservation</button> */}
+            {assignments ? assignments.map((assignments) => (
+            <div><Link to = {`/assignment/${assignments.id}`}>
+                Assignment ID: {assignments.id}</Link></div>
+             )) : (
+             <></>
+             )}
+              {/* {reservations?reservations.map((reservation)=>{
+                <div><Link to  = {`/reservation/${reservation.id}`}>
+                    Reservation : ID {" "+ reservation.id}</Link></div>
+             }) : (
+                <></>
+             )} */}
+             {reservations?reservations.map(reservation =>(
+                <div>
+                    <Link to={`/reservation/${reservation.id}`}>Reservation : ID {reservation.id}</Link>
+                </div>
+             )):(
+                <></>
+             )}        
              </div>
              
             
 
-            <button onClick={()=> createAssignment()}>Submit new Assignment</button>
-            {/* <button onClick={()=> createNewReservation()}>New Reservation</button> */}
+            
             
         </div>
         </div>
