@@ -7,6 +7,9 @@ public class ReservationDto {
     private Car car;
     private UserEntity user;
 
+    private int dayToRent;
+
+
 
     public Car getCar() {
         return car;

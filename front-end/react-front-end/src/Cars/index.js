@@ -27,6 +27,9 @@ const Cars = () => {
     function sendMeToReservation(){
         window.location.href ="/dashboard";
     }
+    function sendMeToNewReservation(){
+        window.location.href ="/reservation";
+    }
         
     return (
         <div>
@@ -34,6 +37,7 @@ const Cars = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
                 </div>
                 <h3>This is all cars available</h3>

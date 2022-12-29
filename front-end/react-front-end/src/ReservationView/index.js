@@ -126,6 +126,9 @@ const ReservartionView = () => {
     function sendMeToReservation(){
         window.location.href ="/dashboard";
     }
+    function sendMeToNewReservation(){
+        window.location.href ="/reservation";
+    }
 
     return (
         <div>
@@ -133,10 +136,11 @@ const ReservartionView = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
                 <div>  
-                <h2>Reservation for {reservation.userEntity.username}</h2>
-                <h2>Date of Reservation {reservation.bookingDate}</h2>
+                {/* <h2>Reservation for {reservation.userEntity.username}</h2> */}
+                {/* <h2>Date of Reservation {reservation.bookingDate}</h2> */}
                     <h2>Rental Days: {reservation.rentalDays}</h2>
                     <h3>Days : <input type="text" id="rentalDays" pattern="[0-9]*" onChange={(e)=> updateReservation("rentalDays",e.target.value)}
                     />
@@ -147,7 +151,6 @@ const ReservartionView = () => {
                                 {reservation.car.rentalPrice}
                     </h2>
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
-                    <h2>Is active : {reservation.active}</h2>
                 </div>
                     <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button> 
                     {/* <select onChange={onOptionChangeHandler}>

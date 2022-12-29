@@ -3,6 +3,8 @@ import { useLocalState } from "../util/useLocalStorage";
 
 const Homepage = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
+
+
     function sendMeHome(){
         window.location.href = "/";
     }
@@ -11,6 +13,9 @@ const Homepage = () => {
     }
     function sendMeToReservation(){
         window.location.href ="/dashboard";
+    }
+    function sendMeToNewReservation(){
+        window.location.href ="/reservation";
     }
     function logMeOut(){
         setJwt(null);
@@ -22,6 +27,7 @@ const Homepage = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button onClick={(e)=>logMeOut()}>Logout</button>
                 </div>
         <h1>Homepage</h1>

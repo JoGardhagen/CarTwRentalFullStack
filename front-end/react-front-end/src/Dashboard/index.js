@@ -59,6 +59,9 @@ const Dashboard = () => {
     function sendMeToCars(){
         window.location.href = "/cars";
     }
+    function sendMeToNewReservation(){
+        window.location.href ="/reservation";
+    }
 
     function createNewReservation(){
         console.log("New Reservation");
@@ -71,7 +74,9 @@ const Dashboard = () => {
             
         }).then(response =>{
             if(response.status === 200) return response.json();
+            window.location.href ="/reservation";
         });
+
         function useless(){
             <ul>
              {reservations.map(reservation=>(
@@ -97,6 +102,7 @@ const Dashboard = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button>Reservation</button>
+                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
             
         <div style={{margin:"2em"}}>

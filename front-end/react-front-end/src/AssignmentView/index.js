@@ -128,6 +128,9 @@ const AssignmentView = () => {
     function sendMeToReservation(){
         window.location.href ="/dashboard";
     }
+    function sendMeToNewReservation(){
+        window.location.href ="/reservation";
+    }
     function createNewReservation(){
         console.log("New Reservation");
         fetch("/api/v1/ordercar",{
@@ -172,6 +175,7 @@ const AssignmentView = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
             </div>
             <h1>Assignment {assignmentId}</h1>  
