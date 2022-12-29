@@ -1,5 +1,6 @@
 package com.gardhagen.carTwRental.contorller;
 
+import com.gardhagen.carTwRental.dto.CarDto;
 import com.gardhagen.carTwRental.model.Car;
 import com.gardhagen.carTwRental.model.UserEntity;
 import com.gardhagen.carTwRental.service.CarService;
@@ -28,9 +29,18 @@ public class CarController {
     public ResponseEntity<?> getAllCars(@AuthenticationPrincipal UserEntity user){
         return ResponseEntity.ok(carService.getAllCars());
     }
-
+//    @PostMapping("/addcar")
+//    public ResponseEntity<?> addCar(@AuthenticationPrincipal UserEntity user , @RequestBody CarDto carDto){
+////        carService.createCar(carDto);
+//        Car car = new Car();
+//        car.setBrand(carDto.getBrand());
+//        car.setModelYear(carDto.getModelYear());
+//        car.setRentalPrice(carDto.getRentalPrice());
+////        carService.addCar(car);
+//        return ResponseEntity.ok(carService.addCar(car));
+//    }
     @PostMapping("/addcar")
-    public ResponseEntity<Car> addCar(@RequestBody Car car){
+    public ResponseEntity<Car> addCar(@AuthenticationPrincipal UserEntity user,@RequestBody Car car){
         return new ResponseEntity<Car>(carService.addCar(car), HttpStatus.CREATED);
     }
     @PutMapping("/updatecar/{id}")

@@ -78,7 +78,7 @@ public class ReservationService implements ReservationServiceInterface {
         reservationOrder.setCar(reservation.getCar());
         reservationOrder.setUserEntity(reservation.getUserEntity());
         reservationOrder.setRentalDays(reservation.getRentalDays());
-        reservationOrder.setActive(reservation.isActive());
+//        reservationOrder.setActive(reservation.isActive());
         return reservationOrder;
     }
     @Override
@@ -87,7 +87,7 @@ public class ReservationService implements ReservationServiceInterface {
         reservationOrder.setCar(reservation.getCar());
         reservationOrder.setUserEntity(reservation.getUserEntity());
         reservationOrder.setRentalDays(reservation.getRentalDays());
-        reservationOrder.setActive(reservation.isActive());
+//        reservationOrder.setActive(reservation.isActive());
         return reservationOrder;
     }
     public Reservation updateReservation(Reservation reservation){

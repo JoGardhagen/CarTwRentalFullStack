@@ -36,7 +36,7 @@ const Cars = () => {
             <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
-                <button onClick={(e)=>sendMeToReservation()}>Reservation</button>
+                <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
                 <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
                 </div>

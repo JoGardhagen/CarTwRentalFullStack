@@ -31,19 +31,14 @@ public class Reservation {
 
     private Date bookingDate = new Date(System.currentTimeMillis());
 
-    private boolean active;
+    private Date startDate;
+    private Date endingDate;
+
 
     public Reservation() {
     }
 
-    public Reservation(long id, Car car, UserEntity userEntity, int rentalDays, Date bookingDate, boolean active) {
-        this.id = id;
-        this.car = car;
-        this.userEntity = userEntity;
-        this.rentalDays = rentalDays;
-        this.bookingDate = bookingDate;
-        this.active = active;
-    }
+
 
     public Reservation(long id, Car car, UserEntity userEntity, int rentalDays, Date bookingDate) {
         this.id = id;
@@ -64,6 +59,15 @@ public class Reservation {
         this.car = car;
         this.userEntity = userEntity;
         this.bookingDate = bookingDate;
+    }
+
+    public Reservation(Car car, UserEntity userEntity, int rentalDays, Date bookingDate, Date startDate, Date endingDate) {
+        this.car = car;
+        this.userEntity = userEntity;
+        this.rentalDays = rentalDays;
+        this.bookingDate = bookingDate;
+        this.startDate = startDate;
+        this.endingDate = endingDate;
     }
 
     public int getRentalDays() {
@@ -106,11 +110,19 @@ public class Reservation {
         this.userEntity = userEntity;
     }
 
-    public boolean isActive() {
-        return active;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(Date endingDate) {
+        this.endingDate = endingDate;
     }
 }

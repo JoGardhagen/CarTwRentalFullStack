@@ -1,6 +1,7 @@
 package com.gardhagen.carTwRental.service;
 
 
+import com.gardhagen.carTwRental.dto.CarDto;
 import com.gardhagen.carTwRental.exception.ResourceNotFoundException;
 import com.gardhagen.carTwRental.model.Car;
 import com.gardhagen.carTwRental.repository.CarRepository;
@@ -26,6 +27,15 @@ public class CarService implements CarServiceInterface{
 
     public List<Car> getAllCars(){
         return carRepository.findAll();
+    }
+
+    public void createCar(CarDto carDto){
+        Car car = new Car();
+//        Car car = new Car();
+        car.setBrand(carDto.getBrand());
+        car.setModelYear(carDto.getModelYear());
+        car.setRentalPrice(carDto.getRentalPrice());
+        carRepository.save(car);
     }
 
     @Override
