@@ -123,8 +123,10 @@ const Dashboard = () => {
                             <th>PRICE</th>
                             <th>ID_User</th>
                             <th>NAME</th>
-                            <th>DAYS</th>
+                            <th>START</th>
+                            <th>END</th>
                             <th>BOOKDATE</th>
+                            <th>DAYS</th>
                             <th>COST</th>
                         </tr>
                     </thead>
@@ -140,8 +142,10 @@ const Dashboard = () => {
                                    <td> {reservation.car.rentalPrice +" "}  </td>
                                    <td> {reservation.userEntity.id+" "}         </td>
                                    <td> {reservation.userEntity.username+" "}   </td>
-                                   <td> {reservation.rentalDays+" "}    </td>
+                                   <td> {reservation.startDate+" "}    </td>
+                                   <td> {reservation.endingDate+" "}</td>
                                    <td> {reservation.bookingDate+" "}   </td>
+                                   <td> {reservation.rentalDays+" "}</td>
                                    <td> {reservation.rentalDays * reservation.car.rentalPrice }</td>         
                             </tr>
                         )})}

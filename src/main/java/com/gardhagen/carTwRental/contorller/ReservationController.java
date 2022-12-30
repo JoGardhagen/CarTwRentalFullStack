@@ -52,22 +52,27 @@ public class ReservationController {
 //        return ResponseEntity.ok(newReservation);
 //
 //    }
-//    @PostMapping("/ordercar")
-//    public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Reservation reservation){
-//        reservationService.creatAndSaveReservation(reservation);
-//        return ResponseEntity.ok(reservation);
-//    }
-@PostMapping("/ordercar")
-public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Car car){
-    ReservationDto newReservation = new ReservationDto();
-    newReservation.setCar(car);
-    newReservation.setUser(user);
-//    Reservation newReservation = reservationService.save(user);
-    reservationService.createReservation(newReservation);
-
-    return ResponseEntity.ok(newReservation);
-
-}
+    @PostMapping("/ordercar")
+    public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Reservation reservation){
+        reservation.setUserEntity(user);
+        long diff = reservation.getEndingDate().getTime()-reservation.getStartDate().getTime();
+        long diffToDays= diff/ (1000*60*60*24);
+        int days= (int)diffToDays;
+        reservation.setRentalDays(days);
+        reservationService.creatAndSaveReservation(reservation);
+        return ResponseEntity.ok(reservation);
+    }
+//@PostMapping("/ordercar")
+//public ResponseEntity<?> createReservation(@AuthenticationPrincipal UserEntity user,@RequestBody Car car){
+//    ReservationDto newReservation = new ReservationDto();
+//    newReservation.setCar(car);
+//    newReservation.setUser(user);
+////    Reservation newReservation = reservationService.save(user);
+//    reservationService.createReservation(newReservation);
+//
+//    return ResponseEntity.ok(newReservation);
+//
+//}
     @PutMapping("/cancelorder/{id}")
     public ResponseEntity<Reservation> canscelOrder(@PathVariable("id")long id, @RequestBody Reservation reservation){
         return new ResponseEntity<Reservation>(reservationService.updateRent(reservation,id),HttpStatus.OK);
