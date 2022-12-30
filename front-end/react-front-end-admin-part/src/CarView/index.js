@@ -55,10 +55,10 @@ const CarView = () => {
         }).then(response =>{
             if(response.status === 200) return response.json();
         }).then(carData=>{
-            // window.location.href ="/cars";
-            console.log(carData);
             
+            console.log(carData);
         })
+        window.location.href ="/cars";
     }
     function deleteCarTarget(){
         fetch(`/api/v1/deletecar/${carId}`,{
@@ -67,14 +67,15 @@ const CarView = () => {
                 Authorization : `Bearer ${jwt}`,
             },
             method:"DELETE",
-            // body: JSON.stringify(car.id)
+            body: JSON.stringify(carId)
         }).then(response =>{
             if(response.status === 200) return response.json();
         }).then(carData=>{
-            // window.location.href ="/cars";
+            
             console.log(carData);
             
         })
+        window.location.href ="/cars";
     }
     const handleSubmit = (e) =>{
         e.preventDefault();
