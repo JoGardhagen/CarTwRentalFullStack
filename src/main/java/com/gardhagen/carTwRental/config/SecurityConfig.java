@@ -1,6 +1,8 @@
 package com.gardhagen.carTwRental.config;
 
 import com.gardhagen.carTwRental.filter.JwtFilter;
+import com.gardhagen.carTwRental.model.UserEntity;
+import com.gardhagen.carTwRental.repository.AuthorityRepository;
 import com.gardhagen.carTwRental.util.CustomPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomPasswordEncoder customPasswordEncoder;
     @Autowired
     private JwtFilter jwtFilter;
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Override @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception{
@@ -51,6 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }).and();
         http.authorizeHttpRequests()
                 .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/v1/myorder/{id}").hasAuthority("ROLE_USER")
+                .antMatchers("/api/v1/ordercar").hasAuthority("ROLE_USER")
+                .antMatchers("/api/v1/myorders").hasAuthority("ROLE_USER")
+                .antMatchers("/api/v1/cancelorder/{id}").hasAuthority("ROLE_USER")
+                .antMatchers("/api/v1/orders").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/v1/addcar").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/v1/updatecar/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/v1//deletecar/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/v1/car/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/v1/customers").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

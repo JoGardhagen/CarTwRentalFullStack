@@ -96,13 +96,15 @@ const Dashboard = () => {
             </ul>
         }
     }
-   
+    function sendMeToCustomers(){
+        window.location.href ="/customers";
+    }
     return (
         <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
-                {/* <button >New Reservation</button> */}
+                <button onClick={(e)=>sendMeToCustomers()}>Customers</button>
                 <button>Logout</button>
             
         <div style={{margin:"2em"}}>
@@ -148,7 +150,7 @@ const Dashboard = () => {
                     </tbody>
                 </table>
             </div>
-            <button onClick={()=> createAssignment()}>Submit new Assignment</button>
+            {/* <button onClick={()=> createAssignment()}>Submit new Assignment</button> */}
             {/* <button onClick={()=> createNewReservation()}>New Reservation</button> */}
             {assignments ? assignments.map((assignments) => (
             <div><Link to = {`/assignment/${assignments.id}`}>
@@ -162,13 +164,13 @@ const Dashboard = () => {
              }) : (
                 <></>
              )} */}
-             {reservations?reservations.map(reservation =>(
+             {/* {reservations?reservations.map(reservation =>(
                 <div>
                     <Link to={`/reservation/${reservation.id}`}>Reservation : ID {reservation.id}</Link>
                 </div>
              )):(
                 <></>
-             )}        
+             )}         */}
              </div>
              
             

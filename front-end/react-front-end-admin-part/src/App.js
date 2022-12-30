@@ -12,7 +12,7 @@ import ReservartionView from './ReservationView';
 import NewReservation from './NewReservation';
 import CarView from './CarView';
 import { useLocalState } from './util/useLocalStorage';
-
+import Customers from './Customers';
 
 function App() {
   
@@ -64,6 +64,12 @@ function App() {
         element={
           <PrivateRoute>
             <NewReservation/>
+          </PrivateRoute>
+        }/>
+        <Route path="/customers"
+        element={
+          <PrivateRoute>
+            <Customers/>
           </PrivateRoute>
         }/>
       <Route path="/" element={ <Homepage/> }/>

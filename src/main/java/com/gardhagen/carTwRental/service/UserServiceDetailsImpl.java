@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,10 @@ public class UserServiceDetailsImpl implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
+
+
+    public List<UserEntity> getUsers() {return userRepository.findAll();}
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
