@@ -14,7 +14,7 @@ const Register = () => {
         //   "username" :"joakim",
         //   "password" :1234
         };  
-        fetch("api/auth/register",{
+        fetch("api/auth/adminregister",{
             headers: {
                 "Content-Type": "application/json"
             },

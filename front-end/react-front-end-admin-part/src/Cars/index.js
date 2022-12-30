@@ -79,7 +79,7 @@ const Cars = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
-                <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
+                {/* <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button> */}
                 <button>Logout</button>
                 </div>
                 <h3>This is all cars available</h3>

@@ -58,4 +58,20 @@ public class UserServiceDetailsImpl implements UserDetailsService {
         authorityRepository.save(authority);
 
     }
+    public void createAdminUser(UserDto userDto) {
+        passwordEncoder = new BCryptPasswordEncoder();
+        UserEntity newUser = new UserEntity();
+        newUser.setUsername(userDto.getUsername());
+//        newUser.setName(userDto.getName());
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+//        newUser.setPassword(passwordEncoder.encode((userDto.getPassword())));
+        newUser.setCreatedAt(LocalDate.now());
+        newUser.setPassword(encodedPassword);
+        userRepository.save(newUser);
+        Authority authority = new Authority();
+        authority.setAuthority("ROLE_ADMIN");
+        authority.setUserEntity(newUser);
+        authorityRepository.save(authority);
+
+    }
 }

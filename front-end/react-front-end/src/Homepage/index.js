@@ -32,7 +32,7 @@ const Homepage = () => {
                 </div>
         <h1>Homepage</h1>
         <h2>Home of this project repo:</h2>
-        <h3><a href='https://github.com/JoGardhagen/CarTwRentalFullStack'>https://github.com/JoGardhagen/CarTwRentalFullStack</a>></h3>
+        <h3><a href='https://github.com/JoGardhagen/CarTwRentalFullStack'>https://github.com/JoGardhagen/CarTwRentalFullStack</a></h3>
         </div>
         );
 };

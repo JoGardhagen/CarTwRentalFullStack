@@ -65,7 +65,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }}
         @PostMapping("register")
-        public ResponseEntity<?> register(@RequestBody UserDto userDto){
+        public ResponseEntity<?> register(@RequestBody UserDto userDto) {
             userServiceDetailsImpl.createUser(userDto);
             try {
                 Authentication authenticate = authenticationManager
@@ -87,6 +87,30 @@ public class AuthController {
             } catch (BadCredentialsException ex) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
+        }
+            @PostMapping("adminregister")
+            public ResponseEntity<?> adminRegister(@RequestBody UserDto userDto){
+                userServiceDetailsImpl.createAdminUser(userDto);
+                try {
+                    Authentication authenticate = authenticationManager
+                            .authenticate(
+                                    new UsernamePasswordAuthenticationToken(
+                                            userDto.getUsername(), userDto.getPassword()
+                                    )
+                            );
+
+                    UserEntity user = (UserEntity) authenticate.getPrincipal();
+
+                    user.setPassword(null);
+                    return ResponseEntity.ok()
+                            .header(
+                                    HttpHeaders.AUTHORIZATION,
+                                    jwtUtil.generateToken(user)
+                            )
+                            .body(user);
+                } catch (BadCredentialsException ex) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                }
 //            try {
 //
 //
