@@ -61,8 +61,9 @@ const Cars = () => {
     function sendMeToReservation(){
         window.location.href ="/dashboard";
     }
-    function sendMeToNewReservation(){
-        window.location.href ="/reservation";
+
+    function sendMeToCustomers(){
+        window.location.href ="/customers";
     }
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -79,6 +80,7 @@ const Cars = () => {
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
+                <button onClick={(e)=>sendMeToCustomers()}>Customers</button>
                 {/* <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button> */}
                 <button>Logout</button>
                 </div>

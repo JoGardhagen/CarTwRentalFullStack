@@ -24,92 +24,32 @@ const Dashboard = () => {
         })
     },[])
 
-
-    useEffect(() =>{
-        fetch("api/assignments",{
-            headers:{
-                "Content-Type" : "application/json",
-                "Authorization": `Bearer ${jwt}`
-            },
-            method: "GET",
-        }).then(response => {
-            if(response.status === 200)return response.json();
-        }).then((assignmentsData) => {
-            setAssignments(assignmentsData);
-        });
-    },[]);
-
-    function createAssignment(){
-        fetch("/api/assignments/",{
-            headers:{
-                "content-type" : "application/json",
-                Authorization : `Bearer ${jwt}`,
-            },
-            method:"POST",
-        }).then(response =>{
-            if(response.status === 200) return response.json();
-        })
-        .then((assignment)=>{
-            window.location.href = `/assignments/${assignment.id}`;
-        });
-    }
     function sendMeHome(){
         window.location.href = "/";
     }
     function sendMeToCars(){
         window.location.href = "/cars";
     }
+    function sendMeToReservation(){
+        window.location.href ="/dashboard";
+    }
     function sendMeToNewReservation(){
         window.location.href ="/reservation";
     }
 
-    function createNewReservation(){
-        console.log("New Reservation");
-        fetch("/api/v1/ordercar",{
-            headers:{
-                "content-type" : "application/json",
-                Authorization : `Bearer ${jwt}`,
-            },
-            method:"POST",
-            
-        }).then(response =>{
-            if(response.status === 200) return response.json();
-            window.location.href ="/reservation";
-        });
 
-        function useless(){
-            <ul>
-             {reservations.map(reservation=>(
-            <li key={reservation.id}>
-                {reservation.id +" "}
-                {reservation.car.id +" "}
-                {reservation.car.brand +" "}
-                {reservation.car.modelYear +" "}
-                {reservation.car.rentalPrice +" "}
-                {reservation.userEntity.id+" "}
-                {reservation.userEntity.username+" "}
-                {reservation.rentalDays+" "}
-                {reservation.bookingDate+" "}
-                {reservation.active }
-            </li>
-        ))}
-            </ul>
-        }
-    }
-   
     return (
+        <div>
         <div className='NavBar'>
                 <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
-                <button>Reservations</button>
+                <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
                 <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
                 <button>Logout</button>
+                </div>
             
         <div style={{margin:"2em"}}>
-            
-
-            
-             <div>
+             
              
             <div>
                 <table>
@@ -152,20 +92,7 @@ const Dashboard = () => {
                     </tbody>
                 </table>
             </div>
-            {/* <button onClick={()=> createAssignment()}>Submit new Assignment</button> */}
-            {/* <button onClick={()=> createNewReservation()}>New Reservation</button> */}
-            {assignments ? assignments.map((assignments) => (
-            <div><Link to = {`/assignment/${assignments.id}`}>
-                Assignment ID: {assignments.id}</Link></div>
-             )) : (
-             <></>
-             )}
-              {/* {reservations?reservations.map((reservation)=>{
-                <div><Link to  = {`/reservation/${reservation.id}`}>
-                    Reservation : ID {" "+ reservation.id}</Link></div>
-             }) : (
-                <></>
-             )} */}
+            
              {reservations?reservations.map(reservation =>(
                 <div>
                     <Link to={`/reservation/${reservation.id}`}>Reservation : ID {reservation.id}</Link>
@@ -174,12 +101,7 @@ const Dashboard = () => {
                 <></>
              )}        
              </div>
-             
-            
-
-            
-            
-        </div>
+        
         </div>
         
     );

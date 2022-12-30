@@ -137,6 +137,7 @@ const ReservartionView = () => {
         event.preventDefault();
         // setReservation(car);
         // createNewReservation();
+        updateReservationFunc();
         console.log(car);
     }
     // const startDateHandler =(e)=>{
@@ -184,21 +185,9 @@ const ReservartionView = () => {
                     </h2>
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
                 </div>
-                    <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button> 
+                    {/* <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button>  */}
                     <form onSubmit={handleSubmit}>
-                <select onChange={onOptionChangeHandler}>
-                        <option>Choose a car</option>
-                        {cars.map((car,index) =>{
-                            return<option key={car.id}>
-                                
-                                {/* {car} */}
-                                {car.id +" "}
-                                {car.brand +" "}
-                                {car.modelYear+" "}
-                                {car.rentalPrice+" "}
-                                </option>
-                        })}
-                    </select>
+              
                     <label htmlFor='startDate'>start</label>
                     <input type="date" ype="date" id="startDate" name="trip-start"
                                 min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("startDate",e.target.value)}
@@ -207,7 +196,7 @@ const ReservartionView = () => {
                     <input type="date" ype="date" id="endingDate" name="trip-start"
                                 min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("endingDate",e.target.value)}
                                 value={reservation.endingDate}/> 
-                    <button type="submit">Submit</button>
+                    <button type="submit">Update this Reservation</button>
                 </form>
             <div>
     

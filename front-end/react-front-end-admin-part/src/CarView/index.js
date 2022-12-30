@@ -5,15 +5,7 @@ import { useLocalState } from "../util/useLocalStorage";
 const CarView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const carId = window.location.href.split("/car/")[1];
-    // const [id,setId] = useState("");
-    // const [brand,setBrand] = useState("");
-    // const [modelYear,setModelYear] = useState("");
-    // const [rentalPrice,setRentalPrice]= useState("");
-    // const carBody = [id,brand,modelYear,rentalPrice];
-    // const [car,setCar] = useState
-    // ({
-    //     carBody
-    // });
+
     const [car,setCar] = useState({
         brand:"",
         modelYear:"",

@@ -1,7 +1,6 @@
 import { useEffect} from 'react';
 import {  Route, Router, Routes,Switch } from 'react-router-dom';
 import './App.css';
-import AssignmentView from './AssignmentView';
 import Cars from './Cars';
 import Dashboard from "./Dashboard";
 import Homepage from './Homepage';
@@ -40,14 +39,7 @@ function App() {
           <Cars></Cars>
         </PrivateRoute>
       }/>
-      <Route
-      path="/assignment/:id"
-        element={
-          <PrivateRoute>
-            <AssignmentView/>
-          </PrivateRoute>
-        }
-      />
+    
       <Route path="/reservation/:id"
         element={
           <PrivateRoute>

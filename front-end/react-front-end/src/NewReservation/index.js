@@ -37,11 +37,7 @@ const NewReservation = () => {
         setModelYear(data[2]);
         setRentalPrice(data[3]);
         setCar(carBody);
-        // updateReservation("id",data[0]);
-        // updateReservation("brand",data[1]);
-        // updateReservation("modelYear",data[2]);
-        // console.log(car);
-        // console.log(carBody);
+
     }function createNewReservation(){
         const reserverationBody ={
             car: carBody,
@@ -60,11 +56,10 @@ const NewReservation = () => {
         }).then(response =>{
             if(response.status === 200) return response.json();
         }).then((reservationData)=>{
-            // window.location.href =`/reservation/${reservationData.id}`;
+
             console.log(reservationData);
-            // sendMeToReservation();
         })
-        // sendMeToReservation();
+
     }
     const onOptionChangeHandler = (e) =>{
         console.log(e.target.value);
@@ -85,13 +80,10 @@ const NewReservation = () => {
     }
     function handleSubmit(event) {
         event.preventDefault();
-        // setReservation(car);
         createNewReservation();
         console.log(car);
     }
-    // const startDateHandler =(e)=>{
-    //     console.log(e.target.value);
-    // }
+
     function updateReservation(prop,value){
         const newReservation = {...reservation};
         newReservation[prop] = value;
@@ -100,11 +92,13 @@ const NewReservation = () => {
     }
     return (
         <div>
+            <div className='NavBar'>
             <button onClick={(e)=>sendMeHome()}>Home</button>
                 <button onClick={(e)=>sendMeToCars()}>Cars</button>
                 <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
                 <button onClick={(e)=>sendMeToNewReservation()}>New Reservation</button>
-                <button>Logout</button>    
+                <button>Logout</button>  
+                </div>  
                 <div>
                 <form onSubmit={handleSubmit}>
                 <select onChange={onOptionChangeHandler}>
