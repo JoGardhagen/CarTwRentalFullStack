@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -35,8 +36,10 @@ public class UserServiceDetailsImpl implements UserDetailsService {
 
         return userOpt.orElseThrow(()-> new UsernameNotFoundException("Invalid credentials"));
 
-
     }
+
+
+
     public UserEntity registerNewUser(UserEntity userEntity){return userRepository.save(userEntity);}
 
     public void createUser(UserDto userDto) {

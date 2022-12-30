@@ -83,7 +83,7 @@ const Cars = () => {
                 <button>Logout</button>
                 </div>
                 <h3>This is all cars available</h3>
-            <ul>
+            {/* <ul>
                     {cars.map(car=>(
                         <li key={car.id}>
                             {car.id +" "}
@@ -92,7 +92,7 @@ const Cars = () => {
                             {car.rentalPrice+" "}
                         </li>
                     ))}
-                </ul>
+                </ul> */}
                 <div>
                 {cars ? cars.map((car) => (
             <div><Link to = {`/car/${car.id}`}>

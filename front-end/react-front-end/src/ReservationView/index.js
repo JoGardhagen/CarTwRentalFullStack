@@ -6,7 +6,7 @@ const ReservartionView = () => {
     const reservationId = window.location.href.split("/reservation/")[1];
     const [cars,setCars]=useState([]);
     const [car,setCar] = useState({
-        // id:"",brand:"",modelYear:"",rentalPrice:""
+        id:"",brand:"",modelYear:"",rentalPrice:""
     });
     const [userEntity,setUserEntity]= useState("")
     // const [active,setActive] = useState(false);
@@ -19,14 +19,21 @@ const ReservartionView = () => {
     // const [carBody,setCarBody]= useState({
     //     id:"",brand:"",modelYear:"",rentalPrice:"",
     // });
+    // const [reservation,setReservation] = useState({
+    //     car,
+    //     userEntity,
+    //     rentalDays:"",
+
+        
+    // });
     const [reservation,setReservation] = useState({
         car,
         userEntity,
-        rentalDays:"",
+        startDate:"",
+        endingDate:""
 
         
     });
-    
     useEffect(()=>{
         fetch(`/api/v1/myorder/${reservationId}`,{
             headers:{
@@ -62,13 +69,20 @@ const ReservartionView = () => {
         console.log(reservation);
     }
     function updateReservationFunc(){
+        const updateReservationBody ={
+            car : reservation.car,
+            userEntity : reservation.userEntity,
+            startDate : reservation.startDate,
+            endingDate: reservation.endingDate,
+
+        };
         fetch(`/api/v1/myorder/${reservationId}`,{
             headers:{
                 "content-type" : "application/json",
                 Authorization : `Bearer ${jwt}`,
             },
             method:"PUT",
-            body: JSON.stringify(reservation),
+            body: JSON.stringify(updateReservationBody),
 
         }).then(response => {
             if(response.status ===200)return response.json();
@@ -113,8 +127,26 @@ const ReservartionView = () => {
         updateReservation("car.brand",data[1]);
         updateReservation("car.modelYear",data[2]);
         updateReservation("car.rentalPrice",data[3]);
+        updateCarBody("car.id",data[0]);
+        updateCarBody("car.brand",data[1]);
+        updateCarBody("car.modelYear",data[2]);
+        updateCarBody("car.rentalPrice",data[3])
         // console.log(car);
         // console.log(carBody);
+    }function handleSubmit(event) {
+        event.preventDefault();
+        // setReservation(car);
+        // createNewReservation();
+        console.log(car);
+    }
+    // const startDateHandler =(e)=>{
+    //     console.log(e.target.value);
+    // }
+    function updateReservation(prop,value){
+        const newReservation = {...reservation};
+        newReservation[prop] = value;
+        setReservation(newReservation)
+        console.log(reservation);
     }
 
     function sendMeHome(){
@@ -153,18 +185,30 @@ const ReservartionView = () => {
                     <h2>At Total Charge :{reservation.rentalDays * reservation.car.rentalPrice +" SEK"}</h2>
                 </div>
                     <button onClick={(e)=> updateReservationFunc()}>Update this Reservation</button> 
-                    {/* <select onChange={onOptionChangeHandler}>
+                    <form onSubmit={handleSubmit}>
+                <select onChange={onOptionChangeHandler}>
                         <option>Choose a car</option>
                         {cars.map((car,index) =>{
                             return<option key={car.id}>
                                 
+                                {/* {car} */}
                                 {car.id +" "}
                                 {car.brand +" "}
                                 {car.modelYear+" "}
                                 {car.rentalPrice+" "}
                                 </option>
                         })}
-                    </select>    */}
+                    </select>
+                    <label htmlFor='startDate'>start</label>
+                    <input type="date" ype="date" id="startDate" name="trip-start"
+                                min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("startDate",e.target.value)}
+                                value={reservation.startDate}/> 
+                    <label htmlFor='endingDate'>ending</label>            
+                    <input type="date" ype="date" id="endingDate" name="trip-start"
+                                min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("endingDate",e.target.value)}
+                                value={reservation.endingDate}/> 
+                    <button type="submit">Submit</button>
+                </form>
             <div>
     
             </div>
