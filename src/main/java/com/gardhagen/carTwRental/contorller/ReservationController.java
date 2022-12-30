@@ -28,7 +28,10 @@ public class ReservationController {
     private CarRepository carRepository;
 //    @Autowired
 //    public ReservationController(ReservationService reservationService){this.reservationService = reservationService;}
-
+    @GetMapping("orders")
+    public ResponseEntity<?> getAllRents(@AuthenticationPrincipal UserEntity user){
+        return ResponseEntity.ok(reservationService.getAllRents());
+    }
     @GetMapping("/myorders")
     public ResponseEntity<?> getReservation(@AuthenticationPrincipal UserEntity user){
         return ResponseEntity.ok(reservationService.findByUserEntity(user));

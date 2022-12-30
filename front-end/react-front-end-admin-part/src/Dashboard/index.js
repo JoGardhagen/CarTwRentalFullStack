@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [reservations,setReservations] = useState([]);
 
     useEffect(()=>{
-        fetch("api/v1/myorders",{
+        fetch("api/v1/orders",{
             headers:{
                 "Content-Type" : "application/json",
                 "Authorization": `Bearer ${jwt}`

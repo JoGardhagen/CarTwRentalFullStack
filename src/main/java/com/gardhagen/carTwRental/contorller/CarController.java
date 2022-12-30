@@ -49,11 +49,16 @@ public class CarController {
         Car updatedCar = carService.addCar(car);
         return  ResponseEntity.ok(updatedCar);
     }
+//    @DeleteMapping("/deletecar/{id}")
+//    public ResponseEntity<String> deleteCar(@PathVariable("id")Long id){
+//        carService.deleteCar(id);
+//        return new ResponseEntity<String>("Car Deleted",HttpStatus.OK);
+//    }
     @DeleteMapping("/deletecar/{id}")
-    public ResponseEntity<String> deleteCar(@PathVariable("id")Long id){
-        carService.deleteCar(id);
-        return new ResponseEntity<String>("Car Deleted",HttpStatus.OK);
-    }
+    public ResponseEntity<?> deleteCar(@AuthenticationPrincipal UserEntity user ,@PathVariable("id")long id){
+    carService.deleteCar(id);
+    return new ResponseEntity<String>("Car Deleted",HttpStatus.OK);
+}
 //en äldre växlings anrop för all bilar
 //    @GetMapping("/exchange")
 //    public List<RentalPriceCurrencyExchangeDTO> getRentalPraices(){

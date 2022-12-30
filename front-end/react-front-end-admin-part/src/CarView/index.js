@@ -40,6 +40,7 @@ const CarView = () => {
 
     }function registerUpdatedCar(){
         const reqCar={
+            id: carId,
             brand : car.brand,
             modelYear : car.modelYear,
             rentalPrice : car.rentalPrice,
@@ -51,6 +52,22 @@ const CarView = () => {
             },
             method:"PUT",
             body: JSON.stringify(reqCar)
+        }).then(response =>{
+            if(response.status === 200) return response.json();
+        }).then(carData=>{
+            // window.location.href ="/cars";
+            console.log(carData);
+            
+        })
+    }
+    function deleteCarTarget(){
+        fetch(`/api/v1/deletecar/${carId}`,{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method:"DELETE",
+            // body: JSON.stringify(car.id)
         }).then(response =>{
             if(response.status === 200) return response.json();
         }).then(carData=>{
@@ -100,7 +117,9 @@ const CarView = () => {
                         <input type="text" id="rentalPrice" onChange={(e)=> updateCarInformation("rentalPrice",e.target.value)} value={car.rentalPrice}/>
                         </div>
                         <button type="submit">Update Car</button>
+                        {/* <button type="delete" onClick={(e)=>deleteCarTarget()}>Delete</button> */}
             </form>
+            <button type="delete" onClick={(e)=>deleteCarTarget()}>Delete</button>
         </div>
     );
 };
