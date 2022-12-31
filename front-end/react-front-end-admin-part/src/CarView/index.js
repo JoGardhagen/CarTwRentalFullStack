@@ -55,10 +55,7 @@ const CarView = () => {
         })
         
     }
-    function setStuff(){
-        setVisible(false);
-        setNonVisibleNegative(true);
-    }
+    
     function deleteCarTarget(){
         fetch(`/api/v1/deletecar/${carId}`,{
             headers:{
@@ -69,7 +66,7 @@ const CarView = () => {
             body: JSON.stringify(carId)
         }).then(response =>{
             if(response.status === 200) return response.json(),setVisible(true);
-            else if(response.status === 500) setStuff();
+            else if(response.status === 500) setNonVisibleNegative(true);
                 
                 
             
