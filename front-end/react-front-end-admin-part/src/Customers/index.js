@@ -27,7 +27,7 @@ const Customers = () => {
         window.location.href = "/cars";
     }
     function sendMeToReservation(){
-        window.location.href ="/reservation";
+        window.location.href ="/dashboard";
     }
     function sendMeToCustomers(){
         window.location.href ="/customers";

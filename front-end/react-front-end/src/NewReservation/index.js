@@ -58,6 +58,7 @@ const NewReservation = () => {
         }).then((reservationData)=>{
 
             console.log(reservationData);
+            sendMeToReservation();
         })
 
     }
@@ -101,6 +102,7 @@ const NewReservation = () => {
                 </div>  
                 <div>
                 <form onSubmit={handleSubmit}>
+                    <div>
                 <select onChange={onOptionChangeHandler}>
                         <option>Choose a car</option>
                         {cars.map((car,index) =>{
@@ -113,15 +115,19 @@ const NewReservation = () => {
                                 {car.rentalPrice+" "}
                                 </option>
                         })}
-                    </select>
+                    </select></div><></>
+                    <div>
                     <label htmlFor='startDate'>start</label>
                     <input type="date" ype="date" id="startDate" name="trip-start"
                                 min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("startDate",e.target.value)}
                                 value={reservation.startDate}/> 
+                                </div>
+                                <div>
                     <label htmlFor='endingDate'>ending</label>            
                     <input type="date" ype="date" id="endingDate" name="trip-start"
                                 min="2022-12-30" max="2023-06-31"  onChange={(e)=> updateReservation("endingDate",e.target.value)}
                                 value={reservation.endingDate}/> 
+                                </div>
                     <button type="submit">Submit</button>
                 </form>
                 </div>

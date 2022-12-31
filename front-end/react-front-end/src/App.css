@@ -1,6 +1,9 @@
 .NavBar{
     align-items: center;
 }
+.NavBar{
+    text-align: center;
+}
 button{
     width: 100px;
     width: 140px;
@@ -21,11 +24,16 @@ th{
 td{
     width: 100px;
 }
-form{
+/* form{
     margin-left: 30%;
-}
-.NavBar{
-    text-align: center;
+} */
+/* form{
+    border: solid bold gray;
     
-
+} */
+.formElement{
+    margin-left: -50px;
+}
+div{
+    text-align: center;
 }

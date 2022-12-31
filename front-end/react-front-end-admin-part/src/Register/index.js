@@ -28,7 +28,7 @@ const Register = () => {
         // })
         }).then((response) => {
               if(response.status == 200){
-
+                    
                 //   return new Promise.all([response.json(),response.headers]),
                   window.location.href="/login";
               }

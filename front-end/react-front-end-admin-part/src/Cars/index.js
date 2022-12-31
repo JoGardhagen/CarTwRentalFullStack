@@ -42,10 +42,11 @@ const Cars = () => {
         }).then(response =>{
             if(response.status === 200) return response.json();
         }).then(carData=>{
-            // window.location.href ="/cars";
+            window.location.href ="/cars";
             console.log(carData);
             
         })
+        // sendMeToCars();
     }
     
 // }

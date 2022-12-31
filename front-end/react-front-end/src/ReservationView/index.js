@@ -90,6 +90,7 @@ const ReservartionView = () => {
             setReservation(reservationData);
             console.log(reservation);
         });
+        sendMeToReservation();
     }
 
     const onOptionChangeHandler = (e) =>{
@@ -149,6 +150,24 @@ const ReservartionView = () => {
         setReservation(newReservation)
         console.log(reservation);
     }
+    function deleteReservation(){
+        fetch(`/api/v1/myorder/${reservationId}`,{
+            headers:{
+                "content-type" : "application/json",
+                Authorization : `Bearer ${jwt}`,
+            },
+            method:"DELETE",
+            body: JSON.stringify(reservationId),
+
+        }).then(response => {
+            if(response.status ===200)return response.json();
+        }).then(reservationData =>{
+            
+            console.log(reservationData);
+
+        })
+        // sendMeToReservation();
+    }
 
     function sendMeHome(){
         window.location.href = "/";
@@ -198,6 +217,7 @@ const ReservartionView = () => {
                                 value={reservation.endingDate}/> 
                     <button type="submit">Update this Reservation</button>
                 </form>
+                <button onClick={(e)=>deleteReservation()}>Delete</button>
             <div>
     
             </div>

@@ -62,12 +62,13 @@ const CarView = () => {
             body: JSON.stringify(carId)
         }).then(response =>{
             if(response.status === 200) return response.json();
+            window.location.href ="/cars";
         }).then(carData=>{
             
             console.log(carData);
-            
-        })
-        window.location.href ="/cars";
+            // alert("Car Deleted");
+        });
+        
     }
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -98,16 +99,18 @@ const CarView = () => {
             <h2>CAR {carId}</h2>
             <form onSubmit={handleSubmit}>
             <div>
-                        <div>
+                        <div className='formElement' id='brand'>
                         <label htmlFor='brand'>Brand</label>
                         <input type="text" id="brand" onChange={(e) => updateCarInformation("brand",e.target.value)} value={car.brand}/>
                         </div>
-                        <div>
-                        <label htmlFor='cbodelYear'>Year Model</label>
+                        <div className='formElement' id='year'>
+                        <label htmlFor='modelYear'>Year Model</label>
                         <input type="text" id="modelYear" onChange={(e)=> updateCarInformation("modelYear",e.target.value)} value={car.modelYear}/>
                         </div>
+                        <div className='formElement' id='price'>
                         <label htmlFor='rentalPrice'>Target Price</label>
                         <input type="text" id="rentalPrice" onChange={(e)=> updateCarInformation("rentalPrice",e.target.value)} value={car.rentalPrice}/>
+                        </div>
                         </div>
                         <button type="submit">Update Car</button>
                         {/* <button type="delete" onClick={(e)=>deleteCarTarget()}>Delete</button> */}

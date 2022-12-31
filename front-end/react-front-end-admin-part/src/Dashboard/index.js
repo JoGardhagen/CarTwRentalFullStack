@@ -25,34 +25,34 @@ const Dashboard = () => {
     },[])
 
 
-    useEffect(() =>{
-        fetch("api/assignments",{
-            headers:{
-                "Content-Type" : "application/json",
-                "Authorization": `Bearer ${jwt}`
-            },
-            method: "GET",
-        }).then(response => {
-            if(response.status === 200)return response.json();
-        }).then((assignmentsData) => {
-            setAssignments(assignmentsData);
-        });
-    },[]);
+    // useEffect(() =>{
+    //     fetch("api/assignments",{
+    //         headers:{
+    //             "Content-Type" : "application/json",
+    //             "Authorization": `Bearer ${jwt}`
+    //         },
+    //         method: "GET",
+    //     }).then(response => {
+    //         if(response.status === 200)return response.json();
+    //     }).then((assignmentsData) => {
+    //         setAssignments(assignmentsData);
+    //     });
+    // },[]);
 
-    function createAssignment(){
-        fetch("/api/assignments/",{
-            headers:{
-                "content-type" : "application/json",
-                Authorization : `Bearer ${jwt}`,
-            },
-            method:"POST",
-        }).then(response =>{
-            if(response.status === 200) return response.json();
-        })
-        .then((assignment)=>{
-            window.location.href = `/assignments/${assignment.id}`;
-        });
-    }
+    // function createAssignment(){
+    //     fetch("/api/assignments/",{
+    //         headers:{
+    //             "content-type" : "application/json",
+    //             Authorization : `Bearer ${jwt}`,
+    //         },
+    //         method:"POST",
+    //     }).then(response =>{
+    //         if(response.status === 200) return response.json();
+    //     })
+    //     .then((assignment)=>{
+    //         window.location.href = `/assignments/${assignment.id}`;
+    //     });
+    // }
     function sendMeHome(){
         window.location.href = "/";
     }
@@ -60,42 +60,9 @@ const Dashboard = () => {
         window.location.href = "/cars";
     }
     function sendMeToReservation(){
-        window.location.href ="/reservation";
+        window.location.href ="/dashboard";
     }
 
-    function createNewReservation(){
-        console.log("New Reservation");
-        fetch("/api/v1/ordercar",{
-            headers:{
-                "content-type" : "application/json",
-                Authorization : `Bearer ${jwt}`,
-            },
-            method:"POST",
-            
-        }).then(response =>{
-            if(response.status === 200) return response.json();
-            window.location.href ="/reservation";
-        });
-
-        function useless(){
-            <ul>
-             {reservations.map(reservation=>(
-            <li key={reservation.id}>
-                {reservation.id +" "}
-                {reservation.car.id +" "}
-                {reservation.car.brand +" "}
-                {reservation.car.modelYear +" "}
-                {reservation.car.rentalPrice +" "}
-                {reservation.userEntity.id+" "}
-                {reservation.userEntity.username+" "}
-                {reservation.rentalDays+" "}
-                {reservation.bookingDate+" "}
-                {reservation.active }
-            </li>
-        ))}
-            </ul>
-        }
-    }
     function sendMeToCustomers(){
         window.location.href ="/customers";
     }

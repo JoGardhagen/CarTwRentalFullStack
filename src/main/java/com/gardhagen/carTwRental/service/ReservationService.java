@@ -88,6 +88,8 @@ public class ReservationService implements ReservationServiceInterface {
     }
     @Override
     public void deleteRent(long id) {
+        reservationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Reservation","id",id));
+        reservationRepository.deleteById(id);
     }
     //MicroService Call here! ///
 //    public List<OrderCurrencyExchangeDTO> getTotalPriceExchanged(){

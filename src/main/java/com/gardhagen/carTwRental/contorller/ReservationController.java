@@ -58,4 +58,8 @@ public class ReservationController {
         Optional<Reservation> reservationOpt = reservationService.findById(reservationId);
         return ResponseEntity.ok(reservationOpt.orElse(new Reservation()));
     }
+    @DeleteMapping("/myorder/{id}")
+        public ResponseEntity<?> deleteRent(@AuthenticationPrincipal UserEntity user,@PathVariable("id")long id){
+        return new ResponseEntity<String>("Reservation Deleted",HttpStatus.OK);
+    }
 }

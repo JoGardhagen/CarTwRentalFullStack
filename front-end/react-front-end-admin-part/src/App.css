@@ -3,8 +3,6 @@
 }
 .NavBar{
     text-align: center;
-    
-
 }
 button{
     width: 100px;
@@ -25,4 +23,18 @@ th{
 }
 td{
     width: 100px;
+}
+.formElement{
+    background-color: aquamarine;
+}
+#brand{
+
+    /* margin-left: 5%; */
+}
+#year{
+    /* margin-left: 5%; */
+}
+
+div{
+    text-align: center;
 }
