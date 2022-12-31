@@ -1,7 +1,6 @@
 package com.gardhagen.carTwRental.service;
 
 
-import com.gardhagen.carTwRental.dto.JustDataReservationDto;
 import com.gardhagen.carTwRental.dto.ReservationDto;
 import com.gardhagen.carTwRental.exception.ResourceNotFoundException;
 import com.gardhagen.carTwRental.model.Reservation;
@@ -10,14 +9,12 @@ import com.gardhagen.carTwRental.repository.CarRepository;
 import com.gardhagen.carTwRental.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservationService implements ReservationServiceInterface {
@@ -53,10 +50,7 @@ public class ReservationService implements ReservationServiceInterface {
     public Optional<Reservation> findById(Long reservationId){
         return reservationRepository.findById(reservationId);
     }
-//    public JustDataReservationDto jdrDto(Long reservatyion){
-//
-//        return jdrDto();
-//    }
+
     @Override
     public Reservation addRent(Reservation reservation) {
         return reservationRepository.save(reservation);
@@ -87,7 +81,6 @@ public class ReservationService implements ReservationServiceInterface {
         reservationOrder.setCar(reservation.getCar());
         reservationOrder.setUserEntity(reservation.getUserEntity());
         reservationOrder.setRentalDays(reservation.getRentalDays());
-//        reservationOrder.setActive(reservation.isActive());
         return reservationOrder;
     }
     public Reservation updateReservation(Reservation reservation){
