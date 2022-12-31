@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocalState } from '../util/useLocalStorage';
 
 const Login = () => {
-
+    const [visibleNegativ,setVisibleNegativ] = useState(false);
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
 
@@ -30,9 +30,9 @@ const Login = () => {
       body: JSON.stringify(reqBody)
     })
       .then((response) => {
-        if(response.status == 200)
+        if(response.status === 200)
             return Promise.all([response.json(), response.headers])
-        else
+        if(response.status===401) setVisibleNegativ(true);
             return Promise.reject("Invalid login attempt"); 
     })
       .then(([body,headers]) =>
@@ -42,7 +42,8 @@ const Login = () => {
           setJwt(headers.get("authorization"));
           window.location.href = 'dashboard';
         }).catch((message) => {
-            alert(message);
+            // alert(message);
+            console.log(message);
         });
 
     }
@@ -62,6 +63,8 @@ const Login = () => {
             <button id ="submit" type="button" onClick={() => sendLoginRequest()}>Login</button>
             <button id ="registrer" type="button"onClick={()=> goToRegister()} >Registrer</button>
         </div>
+        {/* {visible && <div id='success'> Car Succsessfully Removed! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}
+        {visibleNegativ && <div id='nonSuccess'>Non Succsessful!</div>}
         </>
     );
 };

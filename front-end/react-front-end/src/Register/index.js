@@ -1,6 +1,7 @@
 import React ,{useState} from 'react';
 
 const Register = () => {
+    const [visible,setVisible] = useState(false);
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [role,setRole] =useState("");
@@ -33,7 +34,8 @@ const Register = () => {
                 window.location.href='login'
               }
               else
-                  return new Promise.reject("Invalid login attempt"); 
+              setVisible(true);
+                //   return new Promise.reject("Invalid login attempt"); 
         //   })
                 
         })}
@@ -54,6 +56,7 @@ const Register = () => {
                 
                 <button onClick={()=>submitRegister()}>Submit Register</button>
         </div>
+        {visible && <div id='nonSuccess'> Registration Was Not Succsessful!</div>}
         </>
     );
 };

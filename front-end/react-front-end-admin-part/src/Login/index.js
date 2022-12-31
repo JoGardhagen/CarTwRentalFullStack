@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocalState } from '../util/useLocalStorage';
 
 const Login = () => {
-
+    const [visibleNegativ,setVisibleNegativ] = useState(false);
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
 
@@ -34,6 +34,7 @@ const Login = () => {
             return Promise.all([response.json(), response.headers])
         else
             return Promise.reject("Invalid login attempt"); 
+            setVisibleNegativ(true);
     })
       .then(([body,headers]) =>
         {
@@ -42,7 +43,7 @@ const Login = () => {
           setJwt(headers.get("authorization"));
           window.location.href = 'dashboard';
         }).catch((message) => {
-            alert(message);
+            console.log(message);
         });
 
     }
@@ -62,6 +63,7 @@ const Login = () => {
             <button id ="submit" type="button" onClick={() => sendLoginRequest()}>Login</button>
             <button id ="registrer" type="button"onClick={()=> goToRegister()} >Registrer</button>
         </div>
+        {visibleNegativ && <div id='nonSuccess'>Non Succsessful!</div>}
         </>
     );
 };

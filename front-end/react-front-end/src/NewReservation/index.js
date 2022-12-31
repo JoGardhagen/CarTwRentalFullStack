@@ -3,6 +3,8 @@ import { useLocalState } from "../util/useLocalStorage";
 
 const NewReservation = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
+    const [visible,setVisible] = useState(false);
+    const [visibleNegativ,setNonVisibleNegative]= useState(false);
     const [cars,setCars]=useState([]);
     const [car,setCar] = useState({});
     const [userEntity,setUserEntity]= useState("")
@@ -54,11 +56,14 @@ const NewReservation = () => {
             method:"POST",
             body: JSON.stringify(reserverationBody)
         }).then(response =>{
-            if(response.status === 200) return response.json();
+            if(response.status === 200) return response.json(),setVisible(true);
+            else if(response.status === 500) setNonVisibleNegative(true);
+                
         }).then((reservationData)=>{
 
             console.log(reservationData);
-            sendMeToReservation();
+            
+            // sendMeToReservation();
         })
 
     }
@@ -101,6 +106,7 @@ const NewReservation = () => {
                 <button>Logout</button>  
                 </div>  
                 <div>
+                <><h2>New Reservation</h2></>
                 <form onSubmit={handleSubmit}>
                     <div>
                 <select onChange={onOptionChangeHandler}>
@@ -115,7 +121,7 @@ const NewReservation = () => {
                                 {car.rentalPrice+" "}
                                 </option>
                         })}
-                    </select></div><></>
+                    </select></div>
                     <div>
                     <label htmlFor='startDate'>start</label>
                     <input type="date" ype="date" id="startDate" name="trip-start"
@@ -130,6 +136,8 @@ const NewReservation = () => {
                                 </div>
                     <button type="submit">Submit</button>
                 </form>
+                {visible && <div id='success'> Reservation Succsessful <button id='returnBtn'onClick={(e)=> sendMeToReservation()}>Return</button></div>}
+                {visibleNegativ && <div id='nonSuccess'>NonSuccess!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 </div>
 
         </div>
