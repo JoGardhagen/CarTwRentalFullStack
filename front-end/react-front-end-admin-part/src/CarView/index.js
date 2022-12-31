@@ -5,7 +5,9 @@ import { useLocalState } from "../util/useLocalStorage";
 const CarView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const carId = window.location.href.split("/car/")[1];
-
+    const [visible,setVisible] = useState(false);
+    const [visibleNegativ,setNonVisibleNegative]= useState(false);
+    const [visibleUpdate,setVisibleUpdate] = useState(false);
     const [car,setCar] = useState({
         brand:"",
         modelYear:"",
@@ -49,8 +51,13 @@ const CarView = () => {
         }).then(carData=>{
             
             console.log(carData);
+            setVisibleUpdate(true);
         })
-        window.location.href ="/cars";
+        
+    }
+    function setStuff(){
+        setVisible(false);
+        setNonVisibleNegative(true);
     }
     function deleteCarTarget(){
         fetch(`/api/v1/deletecar/${carId}`,{
@@ -61,8 +68,14 @@ const CarView = () => {
             method:"DELETE",
             body: JSON.stringify(carId)
         }).then(response =>{
-            if(response.status === 200) return response.json();
-            window.location.href ="/cars";
+            if(response.status === 200) return response.json(),setVisible(true);
+            else if(response.status === 500) setStuff();
+                
+                
+            
+            // else if(response.status === 500)
+            // alert
+            //     window.location.href ="/cars";
         }).then(carData=>{
             
             console.log(carData);
@@ -90,6 +103,7 @@ const CarView = () => {
     return (
         <div>
             <div className='NavBar'>
+                
         <button onClick={(e)=>sendMeHome()}>Home</button>
         <button onClick={(e)=>sendMeToCars()}>Cars</button>
         <button onClick={(e)=>sendMeToReservation()}>Reservations</button>
@@ -116,6 +130,9 @@ const CarView = () => {
                         {/* <button type="delete" onClick={(e)=>deleteCarTarget()}>Delete</button> */}
             </form>
             <button type="delete" onClick={(e)=>deleteCarTarget()}>Delete</button>
+            {visible && <div id='success'> Car Succsessfully Removed! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
+            {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
+            {visibleUpdate && <div id='success'> Update Succsessful!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
         </div>
     );
 };

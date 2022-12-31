@@ -14,6 +14,7 @@ const Cars = () => {
     const [car,setCar] = useState({
         carBody
     });
+    const [visible,setVisible] = useState(false);
     useEffect(()=>{
         fetch("/api/v1/cars",{
             headers:{
@@ -40,9 +41,13 @@ const Cars = () => {
             method:"POST",
             body: JSON.stringify(reqCar)
         }).then(response =>{
-            if(response.status === 200) return response.json();
+            if(response.status === 200) 
+                return response.json();
+                setVisible(true);
+            
         }).then(carData=>{
-            window.location.href ="/cars";
+            // window.location.href ="/cars";
+            
             console.log(carData);
             
         })
@@ -121,6 +126,7 @@ const Cars = () => {
                         </div>
                         <button type="submit">Regigster New Car</button>
                     </form>
+                    {visible && <div id='success'> Car Succsessfully Added!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 </div>
         </div>
     );
