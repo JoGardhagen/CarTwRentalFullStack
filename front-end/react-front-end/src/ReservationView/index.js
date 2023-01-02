@@ -4,6 +4,9 @@ import { useLocalState } from "../util/useLocalStorage";
 const ReservartionView = () => {
     const [jwt,setJwt] = useLocalState("", "jwt");
     const reservationId = window.location.href.split("/reservation/")[1];
+    const [visible ,setVisible] = useState(false);
+    const [visibleNegativ ,setVisibleNegative] = useState(false);
+    const [visibleUpdate ,setVisibleUpdate]= useState(false);
     const [cars,setCars]=useState([]);
     const [car,setCar] = useState({
         id:"",brand:"",modelYear:"",rentalPrice:""
@@ -85,12 +88,12 @@ const ReservartionView = () => {
             body: JSON.stringify(updateReservationBody),
 
         }).then(response => {
-            if(response.status ===200)return response.json();
+            if(response.status ===200)return response.json(),setVisible(true);
         }).then(reservationData =>{
             setReservation(reservationData);
             console.log(reservation);
         });
-        sendMeToReservation();
+        // sendMeToReservation();
     }
 
     const onOptionChangeHandler = (e) =>{
@@ -218,9 +221,15 @@ const ReservartionView = () => {
                     <button type="submit">Update this Reservation</button>
                 </form>
                 <button onClick={(e)=>deleteReservation()}>Delete</button>
+<<<<<<< HEAD
                 {visible && <div id='success'> Car Succsessfully Removed! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 {visibleUpdate && <div id='success'> Update Succsessful!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
+=======
+                {visible && <div id='success'> Reservation Updated! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
+                {/* {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}
+                {/* {visibleUpdate && <div id='success'> Update Succsessful!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}
+>>>>>>> f1424e0 (updatedBug)
             <div>
     
             </div>
