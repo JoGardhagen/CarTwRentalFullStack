@@ -221,15 +221,11 @@ const ReservartionView = () => {
                     <button type="submit">Update this Reservation</button>
                 </form>
                 <button onClick={(e)=>deleteReservation()}>Delete</button>
-<<<<<<< HEAD
-                {visible && <div id='success'> Car Succsessfully Removed! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
-                {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
-                {visibleUpdate && <div id='success'> Update Succsessful!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
-=======
+
                 {visible && <div id='success'> Reservation Updated! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 {/* {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}
                 {/* {visibleUpdate && <div id='success'> Update Succsessful!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}
->>>>>>> f1424e0 (updatedBug)
+
             <div>
     
             </div>
