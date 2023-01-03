@@ -220,7 +220,7 @@ const ReservartionView = () => {
                                 value={reservation.endingDate}/> 
                     <button type="submit">Update this Reservation</button>
                 </form>
-                <button onClick={(e)=>deleteReservation()}>Delete</button>
+                {/* <button onClick={(e)=>deleteReservation()}>Delete</button> */}
 
                 {visible && <div id='success'> Reservation Updated! <button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>}
                 {/* {visibleNegativ && <div id='nonSuccess'>Cant Remove Car!<button id='returnBtn'onClick={(e)=> sendMeToCars()}>Return</button></div>} */}

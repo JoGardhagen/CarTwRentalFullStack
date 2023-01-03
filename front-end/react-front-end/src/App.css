@@ -63,3 +63,7 @@ div{
     height: 40px;
     padding-top: 15px;
 }
+select{
+    width: 100px;
+    height: 30px;
+}
